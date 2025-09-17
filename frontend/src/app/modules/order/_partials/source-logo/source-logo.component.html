@@ -1,0 +1,24 @@
+<div *ngIf="element.source; else otherSource">
+    <ng-container [ngSwitch]="element.source?.toLowerCase()" class="m-b-2">
+        <div *ngSwitchCase="'facebook'" class="d-flex text-dark-200">
+            <mat-icon matPrefix class="m-r-0 p-r-0 rounded-pill" (click)="openDetail()"><i-tabler name="brand-facebook" class="icon-20 cursor-pointer text-facebook"></i-tabler></mat-icon>
+            <span class="m-l-5 f-w-500 text-black" *ngIf="element.order_id">
+                <span (click)="openDetail()" class="m-r-4">{{ element.order_id }}</span><i-tabler *ngIf="element.order_id" (click)="copy(element.order_id)" name="copy" class="icon-12 cursor-pointer"></i-tabler></span>
+        </div>
+        <div *ngSwitchCase="'tiktok'" class="d-flex text-dark-200">
+            <mat-icon matPrefix class="m-r-0 p-r-0 rounded-pill" (click)="openDetail()"><i-tabler name="brand-tiktok" class="icon-20 cursor-pointer text-tiktok"></i-tabler></mat-icon>
+            <span class="m-l-5 f-w-500 text-black" *ngIf="element.order_id">
+                <span (click)="openDetail()" class="m-r-4">{{ element.order_id }}</span><i-tabler *ngIf="element.order_id" (click)="copy(element.order_id)" name="copy" class="icon-12 cursor-pointer"></i-tabler></span>
+        </div>
+        <div *ngSwitchCase="'shopee'" class="d-flex text-dark-200">
+            <mat-icon matPrefix class="m-r-0 p-r-0 rounded-pill" (click)="openDetail()"><i-tabler name="brand-shopee" class="icon-20 cursor-pointer text-shopee"></i-tabler></mat-icon>
+            <span class="m-l-5 f-w-500 text-black" *ngIf="element.order_id">
+                <span (click)="openDetail()" class="m-r-4">{{ element.order_id }}</span><i-tabler *ngIf="element.order_id" (click)="copy(element.order_id)" name="copy" class="icon-12 cursor-pointer"></i-tabler></span>
+        </div>
+    </ng-container>
+</div>
+
+<ng-template #otherSource>
+    <span class="f-w-500 text-black" *ngIf="element.order_id">
+        <span (click)="openDetail()" class="m-r-4">{{ element.order_id }}</span><i-tabler *ngIf="element.order_id" (click)="copy(element.order_id)" name="copy" class="icon-12 cursor-pointer"></i-tabler></span>
+</ng-template>

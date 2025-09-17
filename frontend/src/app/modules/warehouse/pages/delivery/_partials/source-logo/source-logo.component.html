@@ -1,0 +1,23 @@
+<div *ngIf="element.type === 'bill'; else otherType">
+    <ng-container [ngSwitch]="element.source" class="m-b-2">
+        <div *ngSwitchCase="'facebook'" class="d-flex text-dark-200">
+            <mat-icon matPrefix class="m-r-0 p-r-0 rounded-pill"><i-tabler name="brand-facebook" class="icon-20 cursor-pointer text-facebook"></i-tabler></mat-icon>
+            {{ 'warehouse.inventory.delivery.type.' + element.type | translate }}
+        </div>
+        <div *ngSwitchCase="'tiktok'" class="d-flex text-dark-200">
+            <mat-icon matPrefix class="m-r-0 p-r-0 rounded-pill"><i-tabler name="brand-tiktok" class="icon-20 cursor-pointer text-tiktok"></i-tabler></mat-icon>
+            {{ 'warehouse.inventory.delivery.type.' + element.type | translate }}
+        </div>
+        <div *ngSwitchCase="'shopee'" class="d-flex text-dark-200">
+            <mat-icon matPrefix class="m-r-0 p-r-0 rounded-pill"><i-tabler name="brand-shopee" class="icon-20 cursor-pointer text-shopee"></i-tabler></mat-icon>
+            {{ 'warehouse.inventory.delivery.type.' + element.type | translate }}
+        </div>
+        <div *ngSwitchCase="''" class="d-flex text-dark-200">
+            {{ 'warehouse.inventory.delivery.type.' + element.type | translate }}
+        </div>
+    </ng-container>
+</div>
+
+<ng-template #otherType>
+    <span class="text-dark-200">{{ 'warehouse.inventory.delivery.type.' + element.type | translate }}</span>
+</ng-template>

@@ -1,0 +1,12 @@
+.bg-auth-login {
+  background-image: url("/assets/styles/default/images/backgrounds/auth-login.png");
+  background-size: cover;
+}
+asl-google-signin-button {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}

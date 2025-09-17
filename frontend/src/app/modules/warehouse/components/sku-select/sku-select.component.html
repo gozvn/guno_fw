@@ -1,0 +1,60 @@
+<div class="d-inline-flex m-l-10">
+    <div class="select-product-type">
+        <mat-tab-group
+            [selectedIndex]="selectedTabIndex"
+            (selectedTabChange)="onTabChange($event)"
+            mat-stretch-tabs="false"
+            animationDuration="0ms"
+            class="theme-tab label-padding float-start">
+            <mat-tab *ngFor="let type of productTypes" class="p-0">
+                <ng-template mat-tab-label>
+                    <span>{{ 'warehouse.inventory.common.productType.' + type | translate }}</span>
+                </ng-template>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <mat-form-field appearance="outline" class="select-sku input-height-46 m-l-10" [style.width.px]="600">
+        <input
+                #inputSellerSku
+                type="text"
+                placeholder="{{ 'warehouse.common.searchSku' | translate }}"
+                matInput
+                [formControl]="skuControl"
+                [matAutocomplete]="auto"
+                #autoInput="matAutocompleteTrigger" />
+
+        <mat-autocomplete #auto="matAutocomplete"
+            (optionSelected)="onSkuSelected($event)">
+            <mat-option *ngFor="let sku of filteredSkus" [value]="sku" class="m-b-8">
+                <div class="d-flex align-items-center gap-6">
+                    <ng-container [ngSwitch]="productType">
+                        <ng-container *ngSwitchCase="'sku'">
+                            <img alt="{{ sku.code }}" width="48" class="rounded cursor-pointer product-image"
+                                 *ngIf="sku?.images && sku?.images.length"
+                                 appLazyLoadImage="{{ sku?.images[0] }}" (error)="onImageError($event)" (click)="openLightBox(sku.code, sku?.images[0])" />
+                            <div>
+                                <h5 class="f-s-15 f-w-500 m-t-4 m-b-0">{{ sku.code }} ({{ 'labels.stocktaking' | translate }}: {{ sku?.onHandDb }})</h5>
+                                <div class="m-t-3"><i-tabler name="hash" class="icon-12 cursor-pointer"></i-tabler>
+                                    <span *ngFor="let field of sku?.fields">
+                                <span>{{ field.name }}</span>: <span>{{ field.value }}</span>,
+                            </span>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'product'">
+                            <div>
+                                <h5 class="f-s-15 f-w-500 m-t-4 m-b-0">{{ sku.name }} ({{ 'labels.stocktaking' | translate }}: {{ sku?.onHandDb }})</h5>
+                                <div class="m-t-3">
+                                    <i-tabler name="hash" class="icon-12 cursor-pointer"></i-tabler>
+                                    <span>
+                                        <span>{{ sku.code }}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</div>

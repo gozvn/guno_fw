@@ -1,0 +1,121 @@
+{
+  "configVersion": 1,
+  "timestamp": 1757997329193,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "lazy",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/manifest.webmanifest"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "lazy",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/i18n/en.json",
+        "/assets/i18n/vi.json",
+        "/assets/images/backgrounds/c2a.png",
+        "/assets/images/flags/icon-flag-en.svg",
+        "/assets/images/flags/icon-flag-vi.svg",
+        "/assets/images/icons/order.png",
+        "/assets/images/icons/plus.png",
+        "/assets/images/icons/plus.svg",
+        "/assets/images/icons/product.png",
+        "/assets/images/icons/routers.png",
+        "/assets/images/icons/tiktok.png",
+        "/assets/images/logo/guno-mate-logo.jpg",
+        "/assets/images/profiles/user-1.jpg",
+        "/assets/styles/default/images/backgrounds/auth-login.png",
+        "/assets/styles/default/images/backgrounds/errorimg.svg",
+        "/assets/styles/default/images/backgrounds/login-bg.jpg",
+        "/assets/styles/default/images/backgrounds/login-side.png",
+        "/assets/styles/default/images/backgrounds/maintenance.svg",
+        "/assets/styles/default/images/backgrounds/mega-dd-bg.jpg",
+        "/assets/styles/default/images/flag/icon-flag-en.svg",
+        "/assets/styles/default/images/guno-mate-logo.jpg",
+        "/assets/styles/default/images/landing-page/background/c2a.png",
+        "/assets/styles/default/images/logo-icon.svg",
+        "/assets/styles/default/images/logo.png",
+        "/assets/styles/default/images/logo.svg",
+        "/assets/styles/default/images/profile/user-1.jpg",
+        "/assets/styles/default/images/profile/user-2.jpg",
+        "/assets/styles/default/images/profile/user-4.jpg",
+        "/assets/styles/default/images/svgs/facebook-icon.svg",
+        "/assets/styles/default/images/svgs/google-icon.svg",
+        "/assets/styles/default/js/pace-config.js",
+        "/favicon.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/assets/i18n/en.json": "cf8302fd5df41073932b171ff226f9df8e1cec2e",
+    "/assets/i18n/vi.json": "1728f35218587f88becb2ae5aa032c212cbd70a3",
+    "/assets/images/backgrounds/c2a.png": "6f430fe68019bd8b59358840ee79849689f23675",
+    "/assets/images/flags/icon-flag-en.svg": "f5654b0380a18a929aeb7b38b09837c042665890",
+    "/assets/images/flags/icon-flag-vi.svg": "08d1dc1e577a631401510ec04363da4964f559c1",
+    "/assets/images/icons/order.png": "ddab9484a4d2b9737139716316219b695bfbdd0c",
+    "/assets/images/icons/plus.png": "1b6be75a3ad04150b09964478a3bba16bd974467",
+    "/assets/images/icons/plus.svg": "0120512b7502073df7f65ba2cd0c33fe4d3a6943",
+    "/assets/images/icons/product.png": "2e7e4f9af438df1dfb6fead5e0dee70d28869f49",
+    "/assets/images/icons/routers.png": "248e01ec5f2c0bee9b48892e89c1f6a028bdd16d",
+    "/assets/images/icons/tiktok.png": "7a11e6518c1127ec17d8bf036f1dab3466f99621",
+    "/assets/images/logo/guno-mate-logo.jpg": "2023196291dae6f19523325e67428f23d2955f26",
+    "/assets/images/profiles/user-1.jpg": "05f93ef78c775662a6e4ff42c5525abba2104b2d",
+    "/assets/styles/default/images/backgrounds/auth-login.png": "c1be22daba307107ccd38ce93c97d97825aa163f",
+    "/assets/styles/default/images/backgrounds/errorimg.svg": "f57cd1c2a150b6c7b7a5b64e1198b0576b629a80",
+    "/assets/styles/default/images/backgrounds/login-bg.jpg": "0738fd6dd96941ce35700261bea4fbb89648a9af",
+    "/assets/styles/default/images/backgrounds/login-side.png": "d27915ba76ac27289830b7f8a42562a999f0ff8e",
+    "/assets/styles/default/images/backgrounds/maintenance.svg": "6fcec2838affe059ef125406dbbd16b4c51b8df3",
+    "/assets/styles/default/images/backgrounds/mega-dd-bg.jpg": "19a36a57a6dc6e65c7a084bd79306eab18b0fe87",
+    "/assets/styles/default/images/flag/icon-flag-en.svg": "f5654b0380a18a929aeb7b38b09837c042665890",
+    "/assets/styles/default/images/guno-mate-logo.jpg": "2023196291dae6f19523325e67428f23d2955f26",
+    "/assets/styles/default/images/landing-page/background/c2a.png": "6f430fe68019bd8b59358840ee79849689f23675",
+    "/assets/styles/default/images/logo-icon.svg": "2161ffbe9a97bd3304eb0275abbdd221cb9bece9",
+    "/assets/styles/default/images/logo.png": "fd8a8abdfb711bd14aa9d258d03d36f66d30aeb1",
+    "/assets/styles/default/images/logo.svg": "7233b50030d285f2cf0ce064081ffb60f87fe959",
+    "/assets/styles/default/images/profile/user-1.jpg": "05f93ef78c775662a6e4ff42c5525abba2104b2d",
+    "/assets/styles/default/images/profile/user-2.jpg": "99cf91892ce5ef483d5785e7269de1ddf7a25c47",
+    "/assets/styles/default/images/profile/user-4.jpg": "8f51ca3041d0cbcbf910bb5a0a584d04f2ee6a60",
+    "/assets/styles/default/images/svgs/facebook-icon.svg": "478252e94effa03caeb8759f2a5f40938fb5b3d3",
+    "/assets/styles/default/images/svgs/google-icon.svg": "ceec9fd3a8cb629bd3339cf4a00ea5db6cfd2ad4",
+    "/assets/styles/default/js/pace-config.js": "1ca473feb42569b17f32e2f1402a5cd4270376f7",
+    "/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
+    "/favicon.png": "8f10eec2334465dc9800f96e852081c82dc48068",
+    "/index.html": "e1b5c8d02d292bc38b1f912f3e084641ca37cb97",
+    "/manifest.webmanifest": "5612fd9f0a0d4bdab7781a61e423f930fd29d0e9"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

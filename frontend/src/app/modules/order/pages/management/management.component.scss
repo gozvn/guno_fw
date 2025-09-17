@@ -1,0 +1,67 @@
+::ng-deep {
+  .order-tab-statues {
+    .mat-mdc-tab-labels {
+      padding: 10px 0 !important;
+    }
+
+    .mdc-tab {
+      .mdc-tab__text-label {
+        font-weight: normal;
+      }
+      &.mdc-tab--active {
+        .mdc-tab__text-label {
+          font-weight: 600;
+          .badge-custom-dark {
+            color: #fff !important;
+          }
+        }
+      }
+    }
+  }
+
+  .table-orders {
+    thead {
+      tr {
+        line-height: 20px !important;
+        height: 40px !important;
+      }
+    }
+
+    /* Cố định cột đầu tiên */
+    .sticky-col-1 {
+      position: sticky;
+      left: 0;
+      z-index: 6000;
+    }
+
+    /* Cố định cột thứ hai */
+    .sticky-col-2 {
+      position: sticky;
+      left: 187px; /* Cần điều chỉnh theo chiều rộng của cột đầu tiên */
+      z-index: 6000;
+    }
+
+    /* Cố định cột cuối sang phải */
+    .sticky-right {
+      position: sticky;
+      right: 0;
+      z-index: 6000;
+    }
+
+    .sticky-box-shadow-right {
+      box-shadow: 8px 0px 20px -4px rgba(0, 0, 0, 0.15);
+    }
+
+    .sticky-box-shadow-left {
+      box-shadow: -8px 0px 20px -4px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Cố định header */
+    thead th {
+      position: sticky;
+      top: 0;
+      background: #f8f9fa;
+      z-index: 2000;
+    }
+  }
+}

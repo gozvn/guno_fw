@@ -1,0 +1,316 @@
+<h2 mat-dialog-title>{{'admin.system.permission.titleForUser' | translate: { name: user.fullName } }}</h2>
+<mat-dialog-content>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms" (selectedTabChange)="changeTab($event)">
+        <mat-tab label="{{'admin.system.user.profile' | translate}}">
+            <div class="f-s-14 p-16 rounded m-t-12">
+                <ng-template *ngTemplateOutlet="profileUser"></ng-template>
+            </div>
+        </mat-tab>
+        <mat-tab label="{{'admin.system.user.allRoute' | translate}}">
+            <div class="f-s-14 p-16 rounded m-t-12">
+                <ng-template *ngTemplateOutlet="routeAll"></ng-template>
+            </div>
+        </mat-tab>
+        <mat-tab label="{{'admin.system.user.allowedRoute' | translate}}">
+            <div class="f-s-14 p-16 rounded m-t-12">
+                <ng-template *ngTemplateOutlet="routeAllowed"></ng-template>
+            </div>
+        </mat-tab>
+        <mat-tab label="{{'admin.system.user.deniedRoute' | translate}}">
+            <div class="f-s-14 p-16 rounded m-t-12">
+                <ng-template *ngTemplateOutlet="routeDeny"></ng-template>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+    <ng-template #profileUser>
+        <form [formGroup]="formUser">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <mat-label class="f-w-600 d-block m-b-10">
+                        {{'admin.system.user.fullName' | translate}}
+                    </mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input type="text"
+                            formControlName="fullName"
+                            placeholder="{{'admin.system.user.placeholder.enterFullName' | translate}}"
+                            matInput
+                        />
+                        <mat-error *ngIf="formUser.get('fullName')?.invalid && formUser.get('fullName')?.touched">
+                            <span class="m-b-0" *ngIf="formUser.get('fullName')?.errors?.['required']">
+                                {{ 'admin.system.user.validatedErrors.fullName.required' | translate }}
+                            </span>
+                            <span class="m-b-0" *ngIf="formUser.get('fullName')?.errors?.['minlength']">
+                                {{ 'admin.system.user.validatedErrors.fullName.minLength' | translate }}
+                            </span>
+                            <span class="m-b-0" *ngIf="formUser.get('fullName')?.errors?.['maxlength']">
+                                {{ 'admin.system.user.validatedErrors.fullName.maxLength' | translate }}
+                            </span>
+                            <span class="m-b-0" *ngIf="formUser.get('fullName')?.errors?.['excessWhiteSpace']">
+                                {{ 'validatedErrors.excessWhiteSpace' | translate }}
+                            </span>
+                            <span class="m-b-0" *ngIf="formUser.get('fullName')?.errors?.['htmlTag']">
+                                {{ 'validatedErrors.htmlTag' | translate }}
+                            </span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <mat-label class="f-w-600 d-block m-b-10">
+                        {{'admin.system.user.email' | translate}}
+                    </mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input type="text"
+                            formControlName="email"
+                            placeholder="{{'admin.system.user.placeholder.enterEmail' | translate}}"
+                            matInput
+                        />
+                        <mat-error *ngIf="formUser.get('email')?.invalid && formUser.get('email')?.touched">
+                            <span class="m-b-0" *ngIf="formUser.get('email')?.errors?.['required']">
+                                {{ 'admin.system.user.validatedErrors.email.required' | translate }}
+                            </span>
+                            <span class="m-b-0" *ngIf="formUser.get('email')?.errors?.['pattern']">
+                                {{ 'admin.system.user.validatedErrors.email.pattern' | translate }}
+                            </span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <mat-label class="f-w-600 d-block m-b-10">{{'admin.system.user.role' | translate}}</mat-label>
+                    <mat-form-field class="input-height-46 w-100" appearance="outline">
+                        <mat-select [value]="formUser.get('roleId')?.value" (selectionChange)="formUser.get('roleId')?.setValue($event.value)">
+                            <mat-option *ngFor="let r of roles" [value]="r.id">
+                                <ng-container>
+                                    {{r.name}}
+                                </ng-container>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <mat-label class="f-w-600 d-block m-b-10">{{'admin.system.user.status' | translate}}</mat-label>
+                    <mat-form-field class="input-height-46 w-100" appearance="outline">
+                        <mat-select [value]="formUser.get('status')?.value" (selectionChange)="formUser.get('status')?.setValue($event.value)">
+                            <mat-option *ngFor="let s of statuses" [value]="s">
+                                <ng-container>
+                                    {{ 'admin.system.user.status.' + s | translate }}
+                                </ng-container>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+    <ng-template #routeAll>
+        <div class="row">
+            <div class="col-sm-12 p-l-0">
+                <div class="m-b-15 d-lg-flex align-items-center">
+                    <mat-form-field class="theme-select m-r-10 d-flex input-height-40" appearance="outline" [style.width.px]="400">
+                        <input matInput #keyword type="text" (keydown.enter)="filterRoutes($event)"
+                            placeholder="{{ 'admin.system.permission.placeholder.enterKeyword' | translate }}" />
+                    </mat-form-field>
+                    <button mat-flat-button class="bg-primary text-white btn-height-40" (click)="filterRoutes($event)" [style.width.px]="120">
+                        <i-tabler class="icon-20 m-r-10" name="search">
+                        </i-tabler>
+                        <span>{{'buttons.search' | translate}}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row table-responsive">
+            <table mat-table [dataSource]="aclAll" class="w-100">
+                <ng-container matColumnDef="sequence">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'labels.sequence' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element; let i = index" class="mat-body-1" [style.width.px]="75">
+                        <p class="f-s-15 f-w-700 m-t-4 m-b-0">{{ i + 1 + (pageIndex) * pageSize }}</p>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="allowed">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.permission.allowed' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element; let i = index" class="mat-body-1" [style.width.px]="120">
+                        <mat-slide-toggle color="primary" (change)="toggle($event, element)" [checked]="element.isAllow ? true : false"></mat-slide-toggle>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.permission.name' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element; let i = index" class="mat-body-1">
+                        <span class="f-w-600">{{element.name}}</span>
+                        <ul class="m-b-0">
+                            <li class="text-muted font-size-base">{{ 'admin.system.permission.controller' | translate }}: {{ element.controller }}</li>
+                            <li class="text-muted font-size-base">{{ 'admin.system.permission.middleware' | translate }}: {{ element.middleware.join(', ') }}</li>
+                        </ul>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="groupName">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.route.groupName' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element; let i = index" class="mat-body-1" [style.width.px]="200">
+                        <span>{{element.groupName}}</span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="package">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.permission.package' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element; let i = index" class="mat-body-1" [style.width.px]="100">
+                        <span>{{element.vendor}} / {{element.package}}</span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="uri">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.permission.uri' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element; let i = index" class="mat-body-1" [style.width.px]="250">
+                        <span>{{element.uri}}</span>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+        </div>
+        <div class="text-center p-2" *ngIf="aclAll.length == 0">
+            <div class="text-muted">{{ 'dataNotFound' | translate }}</div>
+        </div>
+    </ng-template>
+    <ng-template #routeAllowed>
+        <div class="row table-responsive">
+            <table mat-table [dataSource]="aclAllow" class="w-100">
+                <ng-container matColumnDef="sequence">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'labels.sequence' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let aLw; let i = index" class="mat-body-1" [style.width.px]="75">
+                        <p class="f-s-15 f-w-700 m-t-4 m-b-0">{{ i + 1 + (pageIndex) * pageSize }}</p>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="allowed">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.permission.allowed' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let aLw; let i = index" class="mat-body-1" [style.width.px]="120">
+                        <mat-slide-toggle color="primary" (change)="toggle($event, aLw)" [checked]="aLw.isAllow ? true : false"></mat-slide-toggle>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.permission.name' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let aLw; let i = index" class="mat-body-1">
+                        <span class="f-w-600">{{aLw.name}}</span>
+                        <ul class="m-b-0">
+                            <li class="text-muted font-size-base">{{ 'admin.system.permission.controller' | translate }}: {{ aLw.controller }}</li>
+                            <li class="text-muted font-size-base">{{ 'admin.system.permission.middleware' | translate }}: {{ aLw.middleware.join(', ') }}</li>
+                        </ul>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="groupName">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.route.groupName' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let aLw; let i = index" class="mat-body-1" [style.width.px]="200">
+                        <span>{{aLw.groupName}}</span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="package">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.permission.package' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let aLw; let i = index" class="mat-body-1" [style.width.px]="100">
+                        <span>{{aLw.vendor}} / {{aLw.package}}</span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="uri">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.permission.uri' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let aLw; let i = index" class="mat-body-1" [style.width.px]="250">
+                        <span>{{aLw.uri}}</span>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+        </div>
+        <div class="text-center p-2" *ngIf="aclAllow.length == 0">
+            <div class="text-muted">{{ 'dataNotFound' | translate }}</div>
+        </div>
+    </ng-template>
+    <ng-template #routeDeny>
+        <div class="row table-responsive">
+            <table mat-table [dataSource]="aclDeny" class="w-100">
+                <ng-container matColumnDef="sequence">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'labels.sequence' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let aDn; let i = index" class="mat-body-1" [style.width.px]="75">
+                        <p class="f-s-15 f-w-700 m-t-4 m-b-0">{{ i + 1 + (pageIndex) * pageSize }}</p>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="allowed">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.permission.allowed' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let aDn; let i = index" class="mat-body-1" [style.width.px]="120">
+                        <mat-slide-toggle color="primary" (change)="toggle($event, aDn)" [checked]="aDn.isAllow ? true : false"></mat-slide-toggle>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.permission.name' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let aDn; let i = index" class="mat-body-1">
+                        <span class="f-w-600">{{aDn.name}}</span>
+                        <ul class="m-b-0">
+                            <li class="text-muted font-size-base">{{ 'admin.system.permission.controller' | translate }}: {{ aDn.controller }}</li>
+                            <li class="text-muted font-size-base">{{ 'admin.system.permission.middleware' | translate }}: {{ aDn.middleware.join(', ') }}</li>
+                        </ul>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="groupName">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.route.groupName' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let aDn; let i = index" class="mat-body-1" [style.width.px]="200">
+                        <span>{{aDn.groupName}}</span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="package">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.permission.package' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let aDn; let i = index" class="mat-body-1" [style.width.px]="100">
+                        <span>{{aDn.vendor}} / {{aDn.package}}</span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="uri">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.permission.uri' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let aDn; let i = index" class="mat-body-1" [style.width.px]="250">
+                        <span>{{aDn.uri}}</span>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+        </div>
+        <div class="text-center p-2" *ngIf="aclDeny.length == 0">
+            <div class="text-muted">{{ 'dataNotFound' | translate }}</div>
+        </div>
+    </ng-template>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="p-r-30 p-b-30">
+    <button mat-stroked-button color="warn" mat-dialog-close>{{ 'buttons.close' | translate }}</button>
+    <button mat-flat-button color="primary" *ngIf="tabCurrent === 'permission-tab-user-info'" (click)="save()" [disabled]="!checkFormValid() || loadingState" cdkFocusInitial>{{ 'buttons.save' | translate }}</button>
+</mat-dialog-actions>

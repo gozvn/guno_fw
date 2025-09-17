@@ -1,0 +1,155 @@
+<h2 mat-dialog-title>{{'admin.system.user.createUser' | translate}}</h2>
+<mat-dialog-content>
+    <form [formGroup]="formUser">
+        <div class="row">
+            <div class="col-sm-12 d-flex align-items-center">
+                <mat-label class="f-w-600 d-block m-b-10">{{'admin.system.user.fullName' | translate}}</mat-label>
+            </div>
+            <div class="col-sm-12">
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text"
+                        formControlName="fullName"
+                        placeholder="{{'admin.system.user.placeholder.enterFullName' | translate}}"
+                        matInput
+                    />
+                    <mat-error *ngIf="formUser.get('fullName')?.invalid && formUser.get('fullName')?.touched">
+                        <span class="m-b-0" *ngIf="formUser.get('fullName')?.errors?.['required']">
+                            {{ 'admin.system.user.validatedErrors.fullName.required' | translate }}
+                        </span>
+                        <span class="m-b-0" *ngIf="formUser.get('fullName')?.errors?.['minlength']">
+                            {{ 'admin.system.user.validatedErrors.fullName.minLength' | translate }}
+                        </span>
+                        <span class="m-b-0" *ngIf="formUser.get('fullName')?.errors?.['maxlength']">
+                            {{ 'admin.system.user.validatedErrors.fullName.maxLength' | translate }}
+                        </span>
+                        <span class="m-b-0" *ngIf="formUser.get('fullName')?.errors?.['excessWhiteSpace']">
+                            {{ 'validatedErrors.excessWhiteSpace' | translate }}
+                        </span>
+                        <span class="m-b-0" *ngIf="formUser.get('fullName')?.errors?.['htmlTag']">
+                            {{ 'validatedErrors.htmlTag' | translate }}
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 d-flex align-items-center">
+                <mat-label class="f-w-600 d-block m-b-10">{{'admin.system.user.email' | translate}}</mat-label>
+            </div>
+            <div class="col-sm-12">
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text"
+                        formControlName="email"
+                        placeholder="{{'admin.system.user.placeholder.enterEmail' | translate}}"
+                        matInput
+                    />
+                    <mat-error *ngIf="formUser.get('email')?.invalid && formUser.get('email')?.touched">
+                        <span class="m-b-0" *ngIf="formUser.get('email')?.errors?.['required']">
+                            {{ 'admin.system.user.validatedErrors.email.required' | translate }}
+                        </span>
+                        <span class="m-b-0" *ngIf="formUser.get('email')?.errors?.['pattern']">
+                            {{ 'admin.system.user.validatedErrors.email.pattern' | translate }}
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 d-flex align-items-center">
+                <mat-label class="f-w-600 d-block m-b-10">{{'admin.system.user.password' | translate}}</mat-label>
+            </div>
+            <div class="col-sm-9">
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text"
+                        formControlName="password"
+                        placeholder="{{'admin.system.user.placeholder.enterPassword' | translate }}"
+                        matInput
+                        [type]="isShowPassword ? 'password' : 'text'"
+                    />
+                    <button
+                        mat-icon-button
+                        matSuffix
+                        (click)="isShowPassword = !isShowPassword"
+                        [attr.aria-label]="'Hide password'"
+                    >
+                        <i-tabler [name]="isShowPassword ? 'eye-closed' : 'eye'"></i-tabler>
+                    </button>
+                    <mat-error *ngIf="formUser.get('password')?.invalid && formUser.get('password')?.touched">
+                        <span class="m-b-0" *ngIf="formUser.get('password')?.errors?.['required']">
+                            {{ 'admin.system.user.validatedErrors.password.required' | translate }}
+                        </span>
+                        <span class="m-b-0" *ngIf="formUser.get('password')?.errors?.['pattern']">
+                            {{ 'admin.system.user.validatedErrors.password.pattern' | translate }}
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-sm-3 d-flex">
+                <button class="w-100 btn-height-46" mat-flat-button color="primary" (click)="generatePassword()">
+                    <i-tabler class="icon-20 m-r-6" name="reload"></i-tabler>
+                    <span>{{ 'admin.system.user.generatePassword'| translate }}</span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <mat-label class="f-w-600 d-block m-b-10">{{'admin.system.user.confirmPassword' | translate}}</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text"
+                        formControlName="confirmPassword"
+                        placeholder="{{'admin.system.user.placeholder.enterConfirmPassword' | translate}}"
+                        matInput
+                        [type]="isShowPassword ? 'password' : 'text'"
+                    />
+                    <button
+                        mat-icon-button
+                        matSuffix
+                        (click)="isShowPassword = !isShowPassword"
+                        [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="isShowPassword"
+                    >
+                        <i-tabler [name]="isShowPassword ? 'eye-closed' : 'eye'"></i-tabler>
+                    </button>
+                    <mat-error *ngIf="formUser.get('confirmPassword')?.invalid && formUser.get('confirmPassword')?.touched">
+                        <span class="m-b-0" *ngIf="formUser.get('confirmPassword')?.errors?.['required']">
+                            {{ 'admin.system.user.validatedErrors.confirmPassword.required' | translate }}
+                        </span>
+                        <span class="m-b-0" *ngIf="formUser.get('confirmPassword')?.errors?.['MatchPassword']">
+                            {{ 'admin.system.user.validatedErrors.confirmPassword.notMatch' | translate }}
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <mat-label class="f-w-600 d-block m-b-10">{{'admin.system.user.role' | translate}}</mat-label>
+                <mat-form-field class="input-height-46 w-100" appearance="outline">
+                    <mat-select [value]="formUser.get('role')?.value" (selectionChange)="formUser.get('role')?.setValue($event.value)">
+                        <mat-option *ngFor="let r of roles" [value]="r.id">
+                            <ng-container>
+                                {{r.name}}
+                            </ng-container>
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <mat-label class="f-w-600 d-block m-b-10">{{'admin.system.user.status' | translate}}</mat-label>
+                <mat-form-field class="input-height-46 w-100" appearance="outline">
+                    <mat-select [value]="formUser.get('status')?.value" (selectionChange)="formUser.get('status')?.setValue($event.value)">
+                        <mat-option *ngFor="let s of statuses" [value]="s">
+                            <ng-container>
+                                {{ 'admin.system.user.status.' + s | translate }}
+                            </ng-container>
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="p-r-30 p-b-30">
+    <button mat-stroked-button color="warn" mat-dialog-close>{{ 'buttons.close' | translate }}</button>
+    <button mat-flat-button color="primary" (click)="save()" [disabled]="!isValid() || loadingState" cdkFocusInitial>{{ 'buttons.save' | translate }}</button>
+</mat-dialog-actions>

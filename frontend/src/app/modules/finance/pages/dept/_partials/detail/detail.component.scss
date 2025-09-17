@@ -1,0 +1,34 @@
+::ng-deep {
+  .warehouse-dialog-dept-create {
+    max-width: 95vw !important;
+  }
+
+  .dialog-header {
+    position: relative;
+    background-color: #fff;
+    color: #000 !important;
+    padding: 10px;
+    font-weight: 600;
+  }
+
+  .dialog-content {
+    background-color: #ccc;
+  }
+
+  .dialog-actions {
+  }
+
+  .close-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: white;
+  }
+
+  .product-info {
+    .mat-mdc-header-row {
+      height: 45px !important;
+      //background-color: #dee1e8;
+    }
+  }
+}

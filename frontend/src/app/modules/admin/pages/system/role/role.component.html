@@ -1,0 +1,125 @@
+<div class="bg-white rounded p-20 m-b-30">
+    <div class="row">
+        <div class="col-sm-8">
+            <h4 class="page-title m-0 f-s-18 f-w-600">
+                {{ 'admin.system.role.title' | translate }}
+            </h4>
+        </div>
+        <div class="col-sm-4 text-right">
+            <div class="d-flex align-items-center justify-content-start justify-content-lg-end">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a class="text-body-color" [routerLink]="['/']">{{ 'labels.dashboard' | translate }}</a></li>
+                    <li class="breadcrumb-item">
+                        <i-tabler name="circle-filled" class="icon-8"></i-tabler>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<mat-card class="cardWithShadow widget-container">
+    <mat-card-content class="p-t-0">
+        <div class="p-t-0 p-b-20 d-lg-flex">
+            <mat-form-field [style.width.px]="300" class="theme-select m-r-10 d-flex m-t-20 input-height-46" appearance="outline">
+                <mat-label>{{ 'admin.system.role.keywordLabel' | translate }}</mat-label>
+                <input type="text"
+                       placeholder="{{ 'admin.system.role.placeholder.enterKeyword' | translate }}"
+                       matInput
+                       (keyup.enter)="onInputKeyword($event)"
+                       [(ngModel)]="keyword" />
+            </mat-form-field>
+            <mat-form-field class="theme-select m-r-10 d-flex m-t-20 input-height-46" appearance="outline" [style.width.px]="200">
+                <mat-label>{{ 'admin.system.role.status' | translate }}</mat-label>
+                <mat-select [value]="status" (selectionChange)="onSelectStatusChange($event)">
+                    <mat-option [value]="-1">{{ 'labels.all' | translate }}</mat-option>
+                    <mat-option *ngFor="let s of statuses" [value]="s">
+                        <ng-container>
+                            {{ 'admin.system.role.status.' + s | translate }}
+                        </ng-container>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="m-r-10 p-t-12 m-t-24" [innerHTML]="'admin.system.role.findCountRole' | translate: { count: filterCount | number }"></div>
+            <button mat-mini-fab color="primary m-t-24" (click)="search()" class="d-flex">
+                <i class="iconify icon-20 d-flex" data-icon="solar:refresh-bold"></i>
+            </button>
+            <button mat-flat-button color="primary m-t-20 m-l-auto btn-height-46" class="d-flex align-items-center" (click)="openDialogCreateRole()">
+                <span>{{'admin.system.role.createRole' | translate}}</span>
+            </button>
+        </div>
+
+        <mat-divider></mat-divider>
+        <div class="table-responsive">
+            <table mat-table [dataSource]="roles" class="w-100">
+                <!-- Weight Column -->
+                <ng-container matColumnDef="sequence">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'labels.sequence' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element; let i = index" class="mat-body-1" [style.width.px]="75">
+                        <p class="f-s-15 f-w-700 m-t-4 m-b-0">{{ i + 1 + (pageIndex) * pageSize }}</p>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.role.name' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="mat-body-1 text-hover-primary">
+                        <a *ngIf="element.permissionLocked === 0 else superAdmin" class="cursor-pointer" (click)="openDialogPermission(element)">
+                            <span class="hover-text">{{element.name}}</span>
+                        </a>
+                        <ng-template #superAdmin>
+                            <span class="text-error">{{ element.name }}</span>
+                        </ng-template>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.role.status' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="mat-body-1" [style.width.px]="300">
+                        <div>
+                            <span [ngClass]="{'bg-error': element.status === 0, 'bg-success': element.status === 1}" class="rounded f-w-600 p-6 p-y-4 f-s-12 m-t-8 text-white">
+                                {{ 'admin.system.role.status.' + element.status| translate }}
+                            </span>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="text-center mat-body-1" [style.width.px]="50">
+                        <ng-container *ngIf="element.permissionLocked == 0">
+                            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="action">
+                                <i-tabler name="dots-vertical"></i-tabler>
+                            </button>
+                            <mat-menu #menu="matMenu" class="cardWithShadow">
+                                <button mat-menu-item (click)="openDialogPermission(element)">
+                                    <mat-icon>
+                                        <i-tabler name="shield-cog"></i-tabler>
+                                    </mat-icon>
+                                    <span>{{'admin.system.role.permission' | translate}}</span>
+                                </button>
+                            </mat-menu>
+                        </ng-container>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+        </div>
+        <mat-divider *ngIf="pageLength" class="m-b-10"></mat-divider>
+        <mat-paginator
+                [length]="pageLength"
+                [pageIndex]="pageIndex"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="pageSizeOptions"
+                (page)="onPageChange($event)"
+                aria-label="Select page"></mat-paginator>
+    </mat-card-content>
+</mat-card>

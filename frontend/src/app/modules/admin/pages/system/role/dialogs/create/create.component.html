@@ -1,0 +1,69 @@
+<h2 mat-dialog-title>{{'admin.system.role.createRole' | translate}}</h2>
+<mat-dialog-content>
+    <form [formGroup]="formRole">
+        <div class="row">
+            <div class="col-sm-12">
+                <mat-label class="f-w-600 d-block m-b-10">{{'admin.system.role.name' | translate}}</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text"
+                        formControlName="name"
+                        placeholder="{{'admin.system.role.placeholder.enterName' | translate}}"
+                        matInput
+                    />
+                    <mat-error *ngIf="formRole.get('name')?.invalid && formRole.get('name')?.touched">
+                        <span class="m-b-0" *ngIf="formRole.get('name')?.errors?.['required']">
+                            {{ 'admin.system.role.validatedErrors.name.required' | translate }}
+                        </span>
+                        <span class="m-b-0" *ngIf="formRole.get('name')?.errors?.['minlength']">
+                            {{ 'admin.system.role.validatedErrors.name.minLength' | translate }}
+                        </span>
+                        <span class="m-b-0" *ngIf="formRole.get('name')?.errors?.['maxlength']">
+                            {{ 'admin.system.role.validatedErrors.name.maxLength' | translate }}
+                        </span>
+                        <span class="m-b-0" *ngIf="formRole.get('name')?.errors?.['existed']">
+                            {{ 'admin.system.role.validatedErrors.name.existed' | translate }}
+                        </span>
+                        <span class="m-b-0" *ngIf="formRole.get('name')?.errors?.['excessWhiteSpace']">
+                            {{ 'validatedErrors.excessWhiteSpace' | translate }}
+                        </span>
+                        <span class="m-b-0" *ngIf="formRole.get('name')?.errors?.['htmlTag']">
+                            {{ 'validatedErrors.htmlTag' | translate }}
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row m-b-20">
+            <div class="col-sm-12">
+                <mat-label class="f-w-600 d-block m-b-10">{{'admin.system.role.status' | translate}}</mat-label>
+                <mat-form-field class="d-flex input-height-46 w-100" appearance="outline">
+                    <mat-select [value]="formRole.get('status')?.value" (selectionChange)="formRole.get('status')?.setValue($event.value)">
+                        <mat-option *ngFor="let s of statuses" [value]="s">
+                            <ng-container>
+                                {{ 'admin.system.role.status.' + s | translate }}
+                            </ng-container>
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <mat-label class="f-w-600 d-block m-b-10">{{'admin.system.role.permissionLocked' | translate}}</mat-label>
+                <mat-form-field class="d-flex input-height-46 w-100" appearance="outline">
+                    <mat-select [value]="formRole.get('permissionLocked')?.value" (selectionChange)="formRole.get('permissionLocked')?.setValue($event.value)">
+                        <mat-option *ngFor="let p of listPermissionLocked" [value]="p">
+                            <ng-container>
+                                {{ 'admin.system.role.permissionLocked.' + p | translate }}
+                            </ng-container>
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="p-r-30 p-b-30">
+    <button mat-stroked-button color="warn" mat-dialog-close>{{ 'buttons.close' | translate }}</button>
+    <button mat-flat-button color="primary" (click)="save()" [disabled]="!isValid() || loadingState" cdkFocusInitial>{{ 'buttons.save' | translate }}</button>
+</mat-dialog-actions>

@@ -1,0 +1,842 @@
+{
+    "appName": "Guno Mate Store",
+    "common": {
+        "noData": "Không tìm thấy dữ liệu phù hợp..."
+    },
+    "labels": {
+        "info": "Thông tin",
+        "image": "Hình ảnh",
+        "totalAmount": "Tổng tiền",
+        "missPhoneNumber": "Chưa có SĐT",
+        "customer": {
+            "mobile": "SĐT",
+            "name": "Khách hàng",
+            "address": "Nhận hàng",
+            "shipping": "ĐVVC"
+        },
+        "finance": "Tài chính",
+        "product": "Sản phẩm",
+        "note": "Ghi chú",
+        "insertedAt": "Tạo lúc",
+        "updatedAt": "Cập nhật",
+        "keyword": "Từ khóa",
+        "keywordPlaceholder": "Nhập từ khóa cần tìm kiếm",
+        "year": "Năm",
+        "selectDate": "Lựa chọn ngày",
+        "filterDate": "Lọc theo ngày",
+        "startDate": "Từ ngày",
+        "endDate": "Đến ngày",
+        "dateFormat": "DD/MM/YYYY",
+        "updateSuccess": "Cập nhật dữ liệu thành công",
+        "admin": "Admin",
+        "sequence": "#",
+        "notSet": "Không chọn",
+        "id": "Id",
+        "orderId": "ID đơn hàng",
+        "inputOrderId": "Nhập ID đơn hàng",
+        "stocktaking": "Tồn kho",
+        "inputProductId": "Nhập mã seller sku",
+        "actions": "Thao tác",
+        "filters": "Bộ lọc",
+        "cancelled": "Đã hủy",
+        "sortBy": "Sắp xếp theo",
+        "status": "Trạng thái",
+        "dashboard": "Dashboard",
+        "livestream": "Livestream",
+        "date": "Ngày",
+        "dateStart": "Ngày bắt đầu",
+        "dateEnd": "Ngày kết thúc",
+        "hour": "Giờ",
+        "minute": "Phút",
+        "success": "Thành công",
+        "shippingProvider": "ĐVVC",
+        "newVersion": {
+            "title": "Bản cập nhật mới đã sẵn sàng!",
+            "description": "Có phiên bản mới, bạn có muốn tải lại để áp dụng không?"
+        },
+        "confirmAction": {
+            "title": "Are you sure?",
+            "description": "Bạn có chắc chắn muốn tiếp tục hay không?"
+        },
+        "copySuccess": "Đã sao chép",
+        "all": "Tất cả",
+        "completed": "Đã hoàn thành",
+        "closed": "Đã đóng",
+        "toProcess": "Đang chờ xử lý",
+        "queue": "Job Queue",
+        "addedAt": "Added at",
+        "processStartedAt": "Started at",
+        "finishedAt": "Finished at",
+        "failedAt": "Failed at",
+        "shop": "Shop",
+        "creator": "Nhà sáng tạo",
+        "creatorPlaceholder": "Nhập tên nhà sáng tạo",
+        "compareToYesterday": "So với ngày hôm trước",
+        "autoRefresh": "Auto Refresh",
+        "autoRefreshnot-set": "Không chọn",
+        "autoRefresh5s": "5 giây",
+        "autoRefresh10s": "10 giây",
+        "autoRefresh20s": "20 giây",
+        "totalFeePercent": "Chi phí",
+        "totalFeePercentPreset": {
+            "not-set": "Không chọn",
+            "lt20": "Chi phí < 20%",
+            "gte20lte30": "20% =< Chi phí <= 30%",
+            "gt30": "Chi phí > 30%"
+        },
+        "orderSource": "Nguồn đơn",
+        "orderSources": {
+            "not-set": "Không chọn",
+            "shop": "SHOP",
+            "video": "VIDEO",
+            "live": "LIVE",
+            "pre_live": "PRE-LIVE",
+            "promotion_page":  "PROMOTION PAGE",
+            "linkshare": "LINKSHARE"
+        },
+        "dateType": "Lọc theo ngày",
+        "dateTypes": {
+            "create": "Tạo đơn",
+            "settlement": "Đối soát",
+            "delivered": "Giao hàng thành công"
+        },
+        "costOfGoodSold": "Giá vốn",
+        "tiktokPaid": "Tiktok TT",
+        "grossProfit": "Gross Profit",
+        "quantity": "Số lượng",
+        "quantities": {
+            "not-set": "Không chọn",
+            "1product": "Một mặt hàng",
+            "1sku": "Một SKU",
+            "multi-sku": "Nhiều SKU"
+        },
+        "trackingNumber": "Tracking Number",
+        "inputTrackingNumber": "Nhập tracking number và ấn Enter!",
+        "scanFailure": "Tracking Number đã scan rồi hoặc không tồn tại",
+        "scanSuccess": "Scan thành công",
+        "scannedTime": "Thời gian scan",
+        "affCommissionAmount": "Phí Affiliate",
+        "clearHistory": "Xóa lịch sử",
+        "refundOnly": "Chỉ hoàn tiền",
+        "warehouse": "Kho hàng",
+        "reports": "Báo cáo"
+    },
+    "buttons": {
+        "backToHome": "Quay về trang chủ",
+        "signIn": "Đăng nhập",
+        "signOut": "Đăng xuất",
+        "activate": "Kích hoạt",
+        "approve": "Approve",
+        "reject": "Từ chối",
+        "confirm": "Xác nhận",
+        "waitToConfirm": "Chờ",
+        "close": "Đóng",
+        "ok": "OK",
+        "clean": "Clean",
+        "cleanAll": "Clean All",
+        "update": "Cập nhật",
+        "save": "Lưu lại",
+        "cancel": "Hủy",
+        "search": "Tìm kiếm",
+        "clickToEdit": "Click để sửa",
+        "retryAll": "Retry All",
+        "remove": "Xóa",
+        "exportExcel": "Xuất Excel"
+    },
+    "auth": {
+        "login": {
+            "title": "Đăng nhập",
+            "email": "Email",
+            "password": "Mật khẩu",
+            "google": "Google",
+            "facebook": "Facebook",
+            "orLoginWith": "hoặc bằng email",
+            "rememberLogin": "Ghi nhớ đăng nhập",
+            "forgotPassword": "Bạn quên mật khẩu?"
+        },
+        "activate": {
+            "title": "Kích hoạt tài khoản",
+            "hello": "Xin chào, <b class=\"text-primary\">{{ fullName }}</b>. Bạn cần phải trả lời chính xác <b>2 câu hỏi</b> bên dưới để kích hoạt tài khoản.",
+            "question1": "Tên đầy đủ của giáo viên chủ nhiệm?",
+            "question2": "Tên đầy đủ của bạn?",
+            "question3": "Tên đầy đủ của con bạn?",
+            "answerGuideline": "Lưu ý: Các câu trả lời phải trùng khớp với dữ liệu của nhà trường!",
+            "minLength": "Độ dài tối thiểu là 6 ký tự!"
+        }
+    },
+    "announce": {
+        "buttons": {
+            "add": "Thêm thông báo"
+        },
+        "notification": {
+            "title": "Thông báo",
+            "breadcrumb": "Thông báo",
+            "homework": "Bài tập về nhà",
+            "sender": "Người gửi",
+            "content": "Nội dung"
+        }
+    },
+    "error": {
+        "404notFound": {
+            "title": "Opps!!!",
+            "description": "This page you are looking for could not be found."
+        },
+        "403accessDenied": {
+            "title": "Opps!!!",
+            "description": "This page you are looking for could not be accessed."
+        }
+    },
+    "maintenance": {
+        "title": "Thông báo về việc bảo trì, nâng cấp website",
+        "mode": "Chế độ bảo trì!!!",
+        "description": "Website đang được xây dựng. Xin bạn vui lòng quay lại sau nhé!"
+    },
+    "tiktok-shop": {
+        "partner": {
+            "seller": {
+                "callbackGunpSP6": {},
+                "title": "Tiktok PartnerGUNO SP6"
+            }
+        }
+    },
+    "dashboard": {
+        "breadcrumb": "Dashboard",
+        "name": "Livesteram ngập tràn deal sốc",
+        "common": {
+            "totalOrder": "Đơn hàng",
+            "totalOrderToShip": "Cần gửi",
+            "totalOrderShipped": "Đã gửi",
+            "totalOrderCancelled": "Đã hủy",
+            "totalAmount": "Doanh số",
+            "totalRevenue": "Doanh thu",
+            "totalFee": "Phí",
+            "totalPaid": "Thanh toán",
+            "totalGrossProfit": "Lợi nhuận gộp",
+            "totalNetProfit": "Lợi nhuận",
+            "totalCostOfGoodsSold": "Giá vốn",
+            "totalFixedCost": "Chi phí cố định",
+            "totalVariableCost": "Chi phí biến đổi",
+            "statsByShop": "Thống kê theo SHOP",
+            "statsByStatus": "Thống kê theo trạng thái",
+            "statsByCreator": "Top nhà sáng tạo",
+            "settlementTotalFee": "Tổng chi phí",
+            "settlementTotalAmount": "Tổng tiền đối soát",
+            "settlementTotalOrders": "Đơn hàng đối soát",
+            "buttons": {
+                "listOrders": "Đơn hàng"
+            },
+            "listOrdersTooltip": "Xem danh sách dơn hàng đã đối soát ngày {{ date }}"
+        },
+        "home": {
+            "title": "Báo cáo thống kê",
+            "description": "Thống kế số lượng đơn hàng, doanh thu, doanh số theo SHOP, nhà sáng tạo..."
+        }
+    },
+    "livestream": {
+        "common": {
+            "name": "Tên livestream",
+            "livestreamId": "Id",
+            "livestreamUser": "NS Livestream",
+            "livestreamTime": "Thời gian",
+            "userStartedAt": "Thời gian bắt đầu",
+            "userEndedAt": "Thời gian kết thúc",
+            "status0": "Mới tạo",
+            "status1": "Chờ xác nhận",
+            "status2": "Đã xác nhận",
+            "userStatus1": "Đã chọn",
+            "userStatus2": "Đã xác nhận",
+            "itemSoldCount": "Lượt bán",
+            "skuOrderPaidCount": "Đơn hàng",
+            "viewerCount": "Người xem",
+            "likeCount": "Lượt thích",
+            "commentCount": "Bình luận",
+            "playing": "Đang livestream",
+            "ended": "Đã kết thúc",
+            "yourLivestream": "Livestream của bạn",
+            "time": "Thời gian"
+        },
+        "search": {
+            "title": "Livestream",
+            "description": "DS livestreams chờ xử lý"
+        },
+        "confirm": {
+            "title": "Livestream chờ xác nhận"
+        },
+        "owner": {
+            "title": "Livestream của bạn"
+        }
+    },
+    "order": {
+        "common": {
+            "title": "Đơn hàng",
+            "id": "Id",
+            "status0": "Mới",
+            "status1": "Đã xác nhận",
+            "status2": "Đã gửi hàng",
+            "status3": "Đã nhận",
+            "status4": "Đang hoàn",
+            "status5": "Đã hoàn",
+            "status6": "Đã hủy",
+            "status7": "Xóa gần đây",
+            "status8": "Đang đóng hàng",
+            "status9": "Chờ chuyển hàng",
+            "status11": "Chờ hàng",
+            "status12": "Chờ in",
+            "status13": "Đã in",
+            "status15": "Hoàn 1 phần",
+            "status16": "Đã thu tiền",
+            "noProduct": "Chưa có sản phẩm",
+            "hasManyProduct": "Nhiều sản phẩm",
+            "deliveryNumber": "Phiếu xuất",
+            "deliveryStatus": "TT Phiếu xuất"
+        },
+        "search": {
+            "title": "Quản lý đơn hàng",
+            "findCountOrder": "Đã tìm thấy <b>{{ count }}</b> đơn hàng"
+        }
+    },
+    "product": {
+        "review": {
+            "common": {
+                "oneStar": "1 sao",
+                "twoStar": "2 sao",
+                "threeStar": "3 sao",
+                "fourStar": "4 sao",
+                "fiveStar": "5 sao",
+                "starReview": "Xếp hạng và đánh giá",
+                "sellerReply": "Trả lời của người bán",
+                "note": "Ghi chú",
+                "notePlaceholder": "Nhập nội dung cần ghi chú",
+                "shopName": "Shop",
+                "productOrderId": "ID Sản phẩm và đơn hàng",
+                "buyerName": "Tên người mua",
+                "status": "Trạng thái",
+                "status-1": "Không chọn",
+                "status0": "Chưa xử lý",
+                "status1": "Đã xử lý",
+                "status2": "Đang xử lý",
+                "canReply": "Có thể trả lời",
+                "canNotReply": "Không thể trả lời",
+                "replyCount": "lượt phản hồi",
+                "orderId": "ID đơn hàng",
+                "productId": "ID sản phẩm",
+                "findCountOrder": "Đã tìm thấy <b>{{ count }}</b> đánh giá",
+                "lastModifyTime": "Đã cập nhật",
+                "hasReply": "Trả lời",
+                "hasReply-1": "Không chọn",
+                "hasReply0": "Chưa trả lời",
+                "hasReply1": "Đã trả lời",
+                "buttons": {
+                    "viewDetail": "Xem chi tiết đánh giá",
+                    "sendReply": "Gửi phản hồi",
+                    "addNote": "Thêm ghi chú"
+                }
+            },
+            "title": "Đánh giá sản phẩm",
+            "reply": "Phản hồi của người bán cho Đánh giá",
+            "replyPlaceholder": "Chia sẻ thêm chi tiết về vấn đề này",
+            "replyNote": "Bạn sẽ không thể chỉnh sửa hoặc xóa đánh giá của mình sau khi đã gửi.",
+            "replyMaxLength": "Tối đa 300 ký tự"
+        }
+    },
+    "warehouse": {
+        "common": {
+            "title": "Kho hàng",
+            "skus": "Danh sách mẫu mã / thuộc tính",
+            "keyword": "Từ khóa",
+            "keywordPlaceholder": "Nhập id đơn hàng hoặc số phiếu xuất",
+            "removeHistory": "Xóa lịch sử scan đơn này",
+            "retry": "Thử lại",
+            "logScan": "Log scan",
+            "logHistory": "Log đối chiếu",
+            "statusSUCCESS": "Thành công",
+            "statusNOT_EXISTS": "Không tồn tại",
+            "statusDUPLICATE": "Trùng đơn",
+            "statusPROCESSING": "Chờ xử lý",
+            "totalQuantity": "Tổng tồn",
+            "onHand": "Tồn thực tế",
+            "onHandLogic": "Tồn thực tế",
+            "reserved": "Tạm giữ",
+            "onShipping": "Đang giao hàng",
+            "returning": "Đang hoàn",
+            "returned": "Đã hoàn",
+            "received": "Đã nhận",
+            "canceled": "Đã hủy",
+            "orderStatus": "Trạng thái đơn hàng",
+            "sellableQuantity": "Có thể bán",
+            "supplier": "Nhà cung cấp",
+            "costPrice": "Giá vốn",
+            "totalAmount": "Thành tiền",
+            "sku": {
+                "sorts": {
+                    "0": "Thời gian cập nhật (mới nhất trước)",
+                    "1": "Thời gian cập nhật (cũ nhất trước)",
+                    "2": "Tồn kho thực tế (tăng dần)",
+                    "3": "Tồn kho thực tế (giảm dần)",
+                    "4":  "Mã mã / Thuộc tính (A-Z)",
+                    "5":  "Mã mã / Thuộc tính (Z-A)",
+                    "6":  "Mã sản phẩm (A-Z)",
+                    "7":  "Mã sản phẩm (Z-A)",
+                    "8": "Có thể bán (tăng dần)",
+                    "9": "Có thể bán (giảm dần)"
+                }
+            },
+            "uploadFileExcel": "Tải file excel",
+            "createdBy": "Người tạo",
+            "warehouse": "Kho",
+            "note": "Ghi chú",
+            "notePlaceholder": "Nhập nội dung ghi chú",
+            "receiptType": "Loại phiếu nhập",
+            "receiptTotalQuantity": "Tổng số hàng",
+            "orderType": "Loại đơn hàng",
+            "deliveryType": "Loại phiếu xuất",
+            "deliveryTotalQuantity": "Tổng số hàng",
+            "status": "Trạng thái",
+            "updatedAt": "Cập nhật",
+            "orderSource": "Nguồn đơn",
+            "orderSources": {
+                "not-set": "Không chọn",
+                "facebook": "Facebook",
+                "tiktok": "Tiktok",
+                "shopee": "Shopee"
+            },
+            "totalItems": "Items",
+            "totalSkus": "SKUs",
+            "totalOrders": "Đơn hàng",
+            "orderInsertedAt": "Ngày tạo đơn",
+            "searchSku": "Tìm kiếm sản phẩm...",
+            "productTotalAmount": "Tiền hàng",
+            "shippingFee": "Phí VC",
+            "discount": "Chiết khấu",
+            "vat": "VAT",
+            "total": "Tổng tiền",
+            "expectedDate": "Ngày về dự kiến",
+            "pancakeActualRemainQuantity": "POS tồn kho",
+            "pancakeRemainQuantity": "POS có thể bán"
+        },
+        "order": {
+            "search": {
+                "title": "Đơn hàng cần gửi / đã gửi"
+            },
+            "scanAwaitingCollection": {
+                "title": "Tiktok - Scan bàn giao ĐVVC",
+                "status-1": "Chờ xử lý",
+                "status0": "Trùng đơn",
+                "status1": "Thành công",
+                "status2": "Không tồn tại"
+            },
+            "scanReturn": {
+                "title": "Tiktok - Scan đơn hoàn hàng",
+                "status-1": "Chờ xử lý",
+                "status0": "Trùng đơn",
+                "status1": "Thành công",
+                "status2": "Không tồn tại"
+            },
+            "scanReturnAndRefund": {
+                "title": "Tiktok - Scan đơn trả hàng, hoàn tiền",
+                "status-1": "Chờ xử lý",
+                "status0": "Trùng đơn",
+                "status1": "Thành công",
+                "status2": "Không tồn tại"
+            },
+            "scanPancakeReturn": {
+                "title": "Pancake - Scan đơn trả hàng",
+                "status-1": "Chờ xử lý",
+                "status0": "Trùng đơn",
+                "status1": "Thành công",
+                "status2": "Không tồn tại"
+            },
+            "scanShopeeReturn": {
+                "title": "Shopee - Scan đơn trả hàng",
+                "status-1": "Chờ xử lý",
+                "status0": "Trùng đơn",
+                "status1": "Thành công",
+                "status2": "Không tồn tại"
+            }
+        },
+        "product": {
+            "common": {
+                "title": "Sản phẩm",
+                "name": "Tên sản phẩm",
+                "code": "Mã sản phẩm"
+            },
+            "search": {
+                "title": "Quản lý sản phẩm",
+                "findCount": "Đã tìm thấy <b>{{ count }}</b> sản phẩm"
+            }
+        },
+        "sku": {
+            "common": {
+                "title": "SKUs",
+                "code": "Mã mẫu (Seller SKU)",
+                "inputSellerSKU": "Nhập mã mẫu để tìm kiếm...",
+                "variation": "Thuộc tính mẫu mã",
+                "inputOnHandValue": "Nhập giá trị tồn kho thực tế"
+            },
+            "management": {
+                "title": "Quản lý SKUs"
+            }
+        },
+        "inventory": {
+            "common": {
+                "title": "",
+                "sellerSku": "Mẫu mã / Thuộc tính",
+                "sellerProduct": "Mã SP",
+                "productCode": "Sản phẩm / Mã SP",
+                "image": "Hình ảnh",
+                "quantity": "Số lượng",
+                "actions": "Thao tác",
+                "note": "Ghi chú",
+                "listSkus": "Danh sách mẫu mã / thuộc tính",
+                "productType": {
+                    "sku": "Mã SKU",
+                    "product": "Mã SP"
+                }
+            },
+            "receipt": {
+                "title": "Nhập hàng",
+                "detail": "Thông tin chi tiết phiếu nhập",
+                "type": {
+                    "not-set": "Không chọn",
+                    "order_returned": "Đơn hoàn hàng",
+                    "manual_inventory": "Kiểm kho bằng tay",
+                    "supplier": "Nhập từ NCC"
+                },
+                "status": {
+                    "done": "Đã nhập hàng",
+                    "canceled": "Đã hủy",
+                    "draft": "Lưu nháp",
+                    "confirmed": "Đã xác nhận"
+                },
+                "findCountReceipt": "Đã tìm thấy <b>{{ count }}</b> phiếu nhập hàng",
+                "create": {
+                    "title": "Tạo phiếu nhập hàng"
+                }
+            },
+            "delivery": {
+                "title": "Xuất hàng",
+                "detail": "Thông tin chi tiết phiếu xuất",
+                "type": {
+                    "not-set": "Không chọn",
+                    "bill": "Đơn hàng",
+                    "manual_inventory": "Kiểm kho bằng tay",
+                    "supplier_return": "Trả nhà cung cấp",
+                    "faulty_product": "Hàng lỗi"
+                },
+                "status": {
+                    "not-set": "Không chọn",
+                    "done": "Đã xuất hàng",
+                    "confirmed": "Đã xác nhận",
+                    "canceled": "Đã hủy",
+                    "draft": "Tạm giữ"
+                },
+                "findCountDelivery": "Đã tìm thấy <b>{{ count }}</b> phiếu xuất hàng",
+                "create": {
+                    "title": "Tạo phiếu xuất hàng"
+                }
+            },
+            "history": {
+                "title": "Lịch sử xuất nhập",
+                "common": {
+                    "title": "Xuất nhập hàng",
+                    "action": "Hành động",
+                    "note": "Chi tiết",
+                    "quantity": "Thay đổi",
+                    "types": {
+                        "delivery": "Xuất kho",
+                        "receipt": "Nhập kho"
+                    }
+                }
+            }
+        },
+        "stocktaking": {
+            "title": "Kiểm hàng",
+            "detail": "Thông tin chi tiết phiếu kiểm hàng",
+            "quantityBefore": "Tồn kho",
+            "quantityAfter": "Sau điều chỉnh",
+            "totalSku": "SL sản phẩm",
+            "totalQuantityDiff": "Tổng SL chênh lệch",
+            "totalQuantityAfter": "Tổng SL sau điều chỉnh",
+            "discrepancy": "Chênh lệch",
+            "status": {
+                "done": "Đã kiểm hàng",
+                "canceled": "Đã hủy",
+                "processing": "Đang kiểm hàng"
+            },
+            "create": {
+                "title": "Tạo phiếu kiểm hàng"
+            }
+        },
+        "stats": {
+            "common": {
+                "title": "Thống kê"
+            },
+            "sku": {
+                "title": "Thống kê SKUs"
+            }
+        }
+    },
+    "finance": {
+        "settlement": {
+            "title": "Đơn hàng đã đối soát - Tài chính"
+        },
+        "dept": {
+            "title": "Công nợ",
+            "common": {
+                "name": "Tên",
+                "description": "Mô tả",
+                "objectId": "Mã đơn hàng / Mã phiếu nhập - xuất",
+                "type": "Loại công nợ",
+                "types": {
+                    "not-set": "Không chọn",
+                    "accounts_receivable": "Công nợ phải thu",
+                    "accounts_payable": "Công nợ phải trả"
+                },
+                "totalAmount": "Tổng công nợ",
+                "totalPaid": "Đã trả / thu",
+                "supplierName": "Nhà cung cấp",
+                "mobile": "Số ĐT",
+                "statuses": {
+                    "not-set": "Không chọn",
+                    "draft": "Nháp",
+                    "canceled": "Đã hủy",
+                    "confirmed": "Chưa giao dịch",
+                    "done": "Đã giao dịch"
+                },
+                "findCount": "Đã tìm thấy <b>{{ count }}</b> công nợ"
+            },
+            "detail": {
+                "title": "Chi tiết công nợ"
+            }
+        }
+    },
+    "reports": {
+        "common": {
+            "labels": {
+                "revenue":"Doanh thu",
+                "expense":"Chi phí",
+                "customer":"Khách hàng"
+            }
+        },
+        "overview": {
+            "title": "Tổng quan"
+        }
+    },
+    "queue": {
+        "dashboard": {
+            "title": "Queue Monitor - Dashboard"
+        }
+    },
+    "admin": {
+        "shop": {
+            "common": {
+                "title": "Shop"
+            },
+            "product": {
+                "common": {
+                    "title": "Sản phẩm",
+                    "setCostOfGoodsSold": "Thiết lập giá vốn cho sản phẩm / SKU",
+                    "inputCostOfGoodsSold": "Nhập giá vốn",
+                    "sellerProduct": "Mã sản phẩm",
+                    "priceProduct": "Giá SP",
+                    "sellerSKU": "Seller SKU",
+                    "sellerSkuOrProduct": "Seller SKU hoặc Product",
+                    "inputSellerProduct": "Nhập seller product",
+                    "inputSellerSKU": "Nhập seller SKU",
+                    "inputSellerSkuOrProduct": "Nhập seller SKU hoặc seller product",
+                    "inputPriceProduct": "Nhập giá sản phẩm",
+                    "costOfGoodsSold": "Giá vốn",
+                    "totalSkus": "Số lượng SKUs",
+                    "statuses": {
+                        "ACTIVATE": "Đang hoạt động",
+                        "DELETED": "Đã xóa",
+                        "DRAFT": "DRAFT",
+                        "PENDING": "PENDING",
+                        "FAILED": "FAILED",
+                        "SELLER_DEACTIVATED": "SELLER_DEACTIVATED",
+                        "PLATFORM_DEACTIVATED": "PLATFORM_DEACTIVATED",
+                        "FREEZE": "FREEZE"
+                    },
+                    "sorts": {
+                        "0": "Thời gian đã tạo (cũ nhất trước)",
+                        "1": "Thời gian đã tạo (mới nhất trước)",
+                        "2": "Thời gian đã cập nhật (cũ nhất trước)",
+                        "3": "Thời gian đã cập nhât (mới nhất trước)"
+                    },
+                    "buttons": {
+                        "setCostOfGoodsSold": "Thiết lập giá"
+                    },
+                    "setCostOfGoodsSoldTooltip": "Thiết lập giá vốn cho sản phẩm"
+                },
+                "search": {
+                    "title": "Quản lý sản phẩm",
+                    "findCountProduct": "Đã tìm thấy <b>{{ count }}</b> sản phẩm",
+                    "findCountSKU": "Đã tìm thấy <b>{{ count }}</b> SKUs"
+                }
+            },
+            "expense": {
+                "title": "Quản lý chi phí",
+                "fixedCost": "Chi phí cố định",
+                "variableCost": "Chi phí biến đổi",
+                "name": "Tên chi phí",
+                "namePlaceholder": "Nhập mô tả về tên chi phí",
+                "amount": "Số tiền",
+                "amountPlaceholder": "Nhập số tiền của chi phí"
+            }
+        },
+        "stats": {
+            "common": {
+                "title": "Thống kê",
+                "totalOrders": "Số lượng Orders"
+            },
+            "product": {
+                "top": {
+                    "title": "Thống kê sản phẩm / SKUs",
+                    "status": "Trạng thái đơn hàng"
+                }
+            }
+        },
+        "system": {
+            "common": {
+                "title": "Quản lý hệ thống"
+            },
+            "user": {
+                "title": "Danh sách người dùng",
+                "keywordLabel": "Keyword",
+                "account": "Tài khoản",
+                "role": "Vai trò",
+                "email": "Email",
+                "fullName": "Họ và tên",
+                "phone": "Số điện thoại",
+                "creatUser": "Tạo người dùng",
+                "password": "Mật khẩu",
+                "confirmPassword": "Xác nhận mật khẩu",
+                "status": "Trạng thái",
+                "permission": "Phân quyền",
+                "switch": "Chuyển tài khoản",
+                "findCountUser": "Đã tìm thấy <b>{{ count }}</b> người dùng",
+                "status.1": "Hoạt động",
+                "status.0": "Không hoạt động",
+                "status.-1": "Vô hiệu hóa",
+                "createdTime": "Thời gian tạo",
+                "id": "ID",
+                "createUser": "Tạo người dùng",
+                "permissionTitle": "Phân quyền cho thành viên '{{name}}'",
+                "generatePassword": "Tạo mới",
+                "profile": "Thông tin người dùng",
+                "allRoute": "Tất cả route",
+                "allowedRoute": "Routes được quyền truy cập",
+                "deniedRoute": "Routes bị cấm truy cập",
+                "placeholder": {
+                    "enterFullName": "Nhập họ và tên",
+                    "enterEmail": "Nhập địa chỉ email",
+                    "enterPhone": "Nhập số điện thoại",
+                    "enterPassword": "Nhập mật khẩu",
+                    "enterConfirmPassword": "Nhập lại mật khẩu",
+                    "enterKeyword": "Nhập tên hoặc email"
+                },
+                "notify": {
+                    "createSuccess": "Tạo người dùng thành công",
+                    "createFailed": "Tạo người dùng thất bại",
+                    "updateSuccess": "Cập nhật người dùng thành công",
+                    "updateFailed": "Cập nhật người dùng thất bại"
+                },
+                "validatedErrors": {
+                    "fullName": {
+                        "required": "Họ và tên không được để rỗng!",
+                        "minLength": "Độ dài tối thiểu là 5 ký tự!",
+                        "maxLength": "Độ dài tối đa là 255 ký tự!"
+                    },
+                    "email": {
+                        "required": "Email không được để rỗng!",
+                        "pattern": "Email không hợp lệ!"
+                    },
+                    "phone": {
+                        "pattern": "Số điện thoại không hợp lệ!"
+                    },
+                    "password": {
+                        "required": "Mật khẩu mới không được để rỗng!",
+                        "pattern": "Mật khẩu phải từ 6 - 30 kí tự, chứa ít nhất 1 chữ số, 1 chữ cái viết hoa, 1 kí tự đặc biệt!"
+                    },
+                    "confirmPassword": {
+                        "required": "Xác nhận mật khẩu không được để rỗng!",
+                        "notMatch": "Mật khẩu không trùng khớp!"
+                    }
+                }
+            },
+            "role": {
+                "profile": "Thông tin vai trò",
+                "allRoute": "Tất cả route",
+                "allowedRoute": "Routes được quyền truy cập",
+                "deniedRoute": "Routes bị cấm truy cập",
+                "keywordLabel": "Keyword",
+                "title": "Danh sách vai trò",
+                "status": "Trạng thái",
+                "name": "Tên",
+                "status.1": "Hoạt động",
+                "status.0": "Không hoạt động",
+                "createRole": "Tạo vai trò",
+                "permission": "Phân quyền",
+                "delete": "Xoá vai trò",
+                "permissionLocked.0": "Không khóa",
+                "permissionLocked.1": "Khóa",
+                "permissionLocked": "Khóa phân quyền",
+                "findCountRole": "Đã tìm thấy <b>{{ count }}</b> vai trò",
+                "placeholder": {
+                    "enterKeyword": "Nhập tên",
+                    "enterName": "Nhập tên"
+                },
+                "notify": {
+                    "createSuccess": "Tạo vai trò thành công",
+                    "createFailed": "Tạo vai trò thất bại",
+                    "updateSuccess": "Cập nhật vai trò thành công",
+                    "updateFailed": "Cập nhật vai trò thất bại"
+                },
+                "validatedErrors": {
+                    "name": {
+                        "required": "Tên không được bỏ trống!",
+                        "minLength": "Độ dài tối thiểu là 3 ký tự!",
+                        "maxLength": "Độ dài tối đa là 100 ký tự!",
+                        "existed": "Vai trò đã tồn tại!"
+                    }
+                }
+            },
+            "route": {
+                "keywordLabel": "Keyword",
+                "title": "Danh sách route",
+                "name": "Tên",
+                "route": "Route",
+                "uri": "URI",
+                "method": "Phương thức",
+                "sync": "Đồng bộ",
+                "groupName": "Nhóm",
+                "findCountRoute": "Đã tìm thấy <b>{{ count }}</b> route",
+                "placeholder": {
+                    "enterRouteName": "Nhập tên router",
+                    "enterRoute": "Nhập route",
+                    "enterGroupName": "Nhập tên nhóm"
+                }
+            },
+            "permission": {
+                "title": "Phân quyền",
+                "titleForUser": "Phân quyền cho thành viên '{{name}}'",
+                "titleForRole": "Phân quyền cho vai trò '{{name}}'",
+                "name": "Tên",
+                "allowed": "Cho phép",
+                "package": "Package",
+                "uri": "URI",
+                "controller": "Controller",
+                "middleware": "Middleware",
+                "placeholder": {
+                    "enterKeyword": "Nhập từ khóa cần tìm kiếm"
+                }
+            }
+        }
+    },
+    "validatedErrors": {
+        "htmlTag": "Đầu vào không được chứa thẻ html",
+        "excessWhiteSpace": "Đầu vào không được chứa khoảng trắng dư thừa"
+    },
+    "Cash on delivery": "COD",
+    "dataNotFound": "Không có dữ liệu"
+}

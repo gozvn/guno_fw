@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-lg-12">
+        <mat-card class="cardWithShadow m-b-20">
+            <mat-card-content class="p-b-0">
+                <div class="hstack align-items-center flex-column flex-lg-row">
+                    <div class="w-100">
+                        <mat-card-title>{{ 'dashboard.home.title' | translate }}</mat-card-title>
+                        <mat-card-subtitle>{{ 'dashboard.home.description' | translate }}</mat-card-subtitle>
+                    </div>
+                    <div class="m-l-auto hstack">
+
+                    </div>
+                </div>
+                <div class="p-t-20 d-lg-flex">
+                    <button mat-flat-button color="primary" (click)="getStats(); reload = true" class="d-flex btn-height-48">
+                        <i class="iconify icon-20 d-flex" data-icon="solar:refresh-bold"></i>
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

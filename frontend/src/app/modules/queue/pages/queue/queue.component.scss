@@ -1,0 +1,17 @@
+::ng-deep {
+  .theme-tab {
+    &.job-tabs {
+      .mat-mdc-tab-labels {
+        padding: 0 !important;
+      }
+      .mat-mdc-card-content {
+        padding-left: 0;
+      }
+    }
+    .timeline {
+      .timeline-item {
+        height: auto;
+      }
+    }
+  }
+}

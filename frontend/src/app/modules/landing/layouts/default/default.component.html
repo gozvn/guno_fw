@@ -1,0 +1,30 @@
+<mat-sidenav-container
+        [ngClass]="{
+            'sidebarNav-mini':
+            options.sidenavCollapsed && options.navPos !== 'top' && !resView,
+            'sidebarNav-horizontal': options.horizontal,
+            cardBorder: options.cardBorder,
+            orange_theme: options.activeTheme == 'orange_theme',
+            blue_theme: options.activeTheme == 'blue_theme',
+            aqua_theme: options.activeTheme == 'aqua_theme',
+            purple_theme: options.activeTheme == 'purple_theme',
+            green_theme: options.activeTheme == 'green_theme',
+            cyan_theme: options.activeTheme == 'cyan_theme'
+        }" [dir]="options.dir!">
+    <!-- ============================================================== -->
+    <!-- Main Content -->
+    <!-- ============================================================== -->
+    <mat-sidenav-content class="contentWrapper" #content>
+
+        <app-landing-page-layout-partial-header></app-landing-page-layout-partial-header>
+
+        <div class="body-wrapper">
+            <main class="pageWrapper"
+                  [ngClass]="{ maxWidth: options.boxed }">
+                <router-outlet></router-outlet>
+            </main>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+<app-landing-page-layout-partial-footer></app-landing-page-layout-partial-footer>

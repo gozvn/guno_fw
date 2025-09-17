@@ -1,0 +1,15 @@
+::ng-deep .router-container {
+    .mat-mdc-fab-base .mdc-button__label {
+        display: flex;
+        align-items: center;
+    }
+    .cancel-action-btn {
+        min-width: 35px;
+        width: 35px;
+    }
+    @media (max-width: 1000px) {
+        .mat-column-name {
+            width: 500px;
+        }
+    }
+}

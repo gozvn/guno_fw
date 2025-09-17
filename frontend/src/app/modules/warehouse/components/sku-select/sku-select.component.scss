@@ -1,0 +1,22 @@
+::ng-deep {
+  .select-sku {
+    margin-top: 10px;
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
+  }
+
+  .select-product-type {
+    .mat-mdc-tab-labels {
+      padding: 0;
+    }
+
+    .theme-tab {
+      &.label-padding {
+        .mat-mdc-tab-labels {
+          padding: 10px 0;
+        }
+      }
+    }
+  }
+}

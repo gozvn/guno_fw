@@ -1,0 +1,165 @@
+<h2 mat-dialog-title class="dialog-header" *ngIf="order">
+    Chi tiết đơn hàng #{{ order?.order_id }}
+</h2>
+<mat-icon class="btn-close-dialog-icon cursor-pointer"
+          mat-dialog-close
+          aria-label="Đóng">
+    <i mat-dialog-close class="iconify icon-20" data-icon="solar:close-square-bold"></i>
+</mat-icon>
+<mat-dialog-content class="p-0 m-0 p-l-15 p-r-15 p-t-15 dialog-content" *ngIf="order">
+    <div class="row">
+        <div class="col-lg-3 p-b-15">
+            <mat-card class="cardWithShadow m-b-0">
+                <mat-card-header class="p-15">
+                    <mat-card-title class="m-b-0 text-black f-s-16">{{ 'labels.info' | translate }}</mat-card-title>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content class="p-15">
+                    <div class="row m-b-10">
+                        <div class="col-sm-12 d-flex align-items-center">
+                            <mat-label class="f-w-600 d-block m-b-10">{{ 'warehouse.common.orderType' | translate }}</mat-label>
+                        </div>
+                        <div class="col-sm-12 d-flex align-items-center">
+                            <app-order-partial-source-logo [element]="order"></app-order-partial-source-logo>
+                        </div>
+                    </div>
+                    <div class="row m-b-10">
+                        <div class="col-sm-12 d-flex align-items-center">
+                            <mat-label class="f-w-600 d-block m-b-10">{{ 'warehouse.common.status' | translate }}</mat-label>
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <app-order-partial-status [element]="order"></app-order-partial-status>
+                        </div>
+                    </div>
+                    <div class="row m-b-10" *ngIf="order.inserted_at">
+                        <div class="col-sm-12 d-flex align-items-center">
+                            <mat-label class="f-w-600 d-block m-b-10">{{ 'warehouse.common.orderInsertedAt' | translate }}</mat-label>
+                        </div>
+                        <div class="col-sm-12">
+                            {{ order?.inserted_at | date: 'HH:mm, dd/MM/YYYY' }}
+                        </div>
+                    </div>
+                    <div class="row m-b-10">
+                        <div class="col-sm-12 d-flex align-items-center">
+                            <mat-label class="f-w-600 d-block m-b-10">{{ 'labels.totalAmount' | translate }}</mat-label>
+                        </div>
+                        <div class="col-sm-12 text-dark-200">
+                            {{ order?.data?.money_to_collect | number }} ₫
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 d-flex align-items-center">
+                            <mat-label class="f-w-600 d-block m-b-10">{{ 'warehouse.common.note' | translate }}</mat-label>
+                        </div>
+                        <div class="col-sm-12">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <textarea [disabled]="true" rows="5" matInput placeholder="{{ 'warehouse.common.notePlaceholder' | translate }}" [value]="order?.data?.note"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-lg-9 p-b-15">
+            <mat-card class="cardWithShadow m-b-0">
+                <mat-card-header class="p-15">
+                    <mat-card-title class="m-b-0 text-black f-s-16">{{ 'warehouse.inventory.common.listSkus' | translate }}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="p-0">
+                    <mat-divider></mat-divider>
+                    <div class="table-responsive">
+                        <table mat-table [dataSource]="items" class="w-100 table-default table-custom-small">
+                            <ng-container matColumnDef="sellerSku">
+                                <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
+                                    {{ 'warehouse.inventory.common.sellerSku' | translate }}
+                                </th>
+                                <td mat-cell *matCellDef="let element" class="f-s-14 fixed-width-column">
+                                    <div class="d-flex align-items-center gap-6">
+                                        <div>
+                                            <h5 class="f-s-15 f-w-700 m-t-4 m-b-0">{{ element?.display_id ?? 'N/A' }} <i-tabler *ngIf="element.display_id" (click)="copy(element.display_id)" name="copy" class="icon-12 cursor-pointer"></i-tabler></h5>
+                                            <div class="m-t-3"><i-tabler name="hash" class="icon-12 cursor-pointer"></i-tabler>
+                                                <span>{{ element.detail }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="productName">
+                                <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
+                                    {{ 'warehouse.inventory.common.productCode' | translate }}
+                                </th>
+                                <td mat-cell *matCellDef="let element" class="mat-body-1 fixed-width-column">
+                                    <h5 class="f-s-15 f-w-400 m-t-4 m-b-0 w-100 text-truncate cursor-pointer" style="max-width: 300px;"
+                                        matTooltip="{{ element.name }}"
+                                        matTooltipPosition="right">{{ element.name }}</h5>
+                                    <div class="m-t-3">
+                                        <i-tabler name="hash" class="icon-12 cursor-pointer"></i-tabler> {{ element.product_display_id }} <i-tabler *ngIf="element.product_display_id" (click)="copy(element.product_display_id)" name="copy" class="icon-12 cursor-pointer"></i-tabler>
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="image">
+                                <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
+                                    {{ 'warehouse.inventory.common.image' | translate }}
+                                </th>
+                                <td mat-cell *matCellDef="let element" class="mat-body-1 fixed-width-column" [style.width.px]="100">
+                                    <img alt="{{ element.seller_sku }}" width="48" class="rounded cursor-pointer"
+                                         appLazyLoadImage="{{ element.images[0] }}" (error)="onImageError($event)" (click)="openLightBox(element?.display_id, element?.images[0])" />
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="quantity">
+                                <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 text-right">
+                                    {{ 'warehouse.inventory.common.quantity' | translate }}
+                                </th>
+                                <td mat-cell *matCellDef="let element" class="mat-body-1 text-right text-dark fixed-width-column" [style.width.px]="100">
+                                    {{ element?.quantity ?? 'N/A' }}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="deliveryNumber">
+                                <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 text-right">
+                                    {{ 'order.common.deliveryNumber' | translate }}
+                                </th>
+                                <td mat-cell *matCellDef="let element" class="mat-body-1 text-right text-dark fixed-width-column" [style.width.px]="150">
+                                    <a class="cursor-pointer text-primary" (click)="openDialogDetailDelivery(element?.delivery_number)">{{ element?.delivery_number ?? 'N/A' }}</a>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="deliveryStatus">
+                                <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 text-center">
+                                    {{ 'order.common.deliveryStatus' | translate }}
+                                </th>
+                                <td mat-cell *matCellDef="let element" class="mat-body-1 text-center fixed-width-column" [style.width.px]="150">
+                                    <label class="text-white rounded f-w-600 p-6 p-y-4 f-s-12 bg-success" *ngIf="element.delivery_status === 'done'">{{ 'warehouse.inventory.delivery.status.' + element.delivery_status | translate }}</label>
+                                    <label class="text-white rounded f-w-600 p-6 p-y-4 f-s-12 bg-warning" *ngIf="element.delivery_status === 'confirmed'">{{ 'warehouse.inventory.delivery.status.' + element.delivery_status | translate }}</label>
+                                    <label class="text-white rounded f-w-600 p-6 p-y-4 f-s-12 bg-error" *ngIf="element.delivery_status === 'canceled'">{{ 'warehouse.inventory.delivery.status.' + element.delivery_status | translate }}</label>
+                                    <label class="text-white rounded f-w-600 p-6 p-y-4 f-s-12 bg-primary" *ngIf="element.delivery_status === 'draft'">{{ 'warehouse.inventory.delivery.status.' + element.delivery_status | translate }}</label>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="actions">
+                                <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 p-t-10 f-s-14 text-center">
+                                    <i-tabler class="icon-20" name="settings"></i-tabler>
+                                </th>
+                                <td mat-cell *matCellDef="let element" class="mat-body-1 text-center fixed-width-column" [style.width.px]="70">
+
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                        </table>
+                        <div class="text-center p-t-20 p-b-20" *ngIf="items.length == 0">
+                            <div class="text-muted">{{ 'common.noData' | translate }}</div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="p-10 dialog-actions bg-dark">
+    <button mat-stroked-button color="warn" mat-dialog-close>{{ 'buttons.close' | translate }}</button>
+</mat-dialog-actions>

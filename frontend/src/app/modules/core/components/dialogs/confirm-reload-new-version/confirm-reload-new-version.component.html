@@ -1,0 +1,9 @@
+<h5 mat-dialog-title class="mat-subtitle-1">{{ 'labels.newVersion.title' | translate }}</h5>
+<div mat-dialog-content class="mat-subtitle-2 lh-16">
+    {{ 'labels.newVersion.description' | translate }}
+</div>
+<div class="p-24 p-t-0 text-right">
+    <button mat-flat-button color="primary" (click)="reload()" mat-dialog-close cdkFocusInitial>
+        {{ 'buttons.update' | translate }}
+    </button>
+</div>

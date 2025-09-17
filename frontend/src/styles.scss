@@ -1,0 +1,266 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "styles/default/css/app.css";
+@import 'highlight.js/styles/dark.css';
+@import 'drawflow/dist/drawflow.min.css';
+
+.ql-editor {
+  font-family: Roboto, Manrope, sans-serif;
+  font-size: 14px;
+  line-height: 26px;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.image-gray {
+  filter: grayscale(100%);
+}
+
+.float-right {
+  float: right !important;
+}
+.btn-height-40 {
+  height: 40px !important;
+}
+.btn-height-46 {
+  height: 46px !important;
+}
+
+.input-height-40 {
+  height: 40px !important;
+  .mat-mdc-form-field-flex {
+    height: 40px;
+  }
+}
+.input-height-46 {
+  height: 46px !important;
+  .mat-mdc-form-field-flex {
+    height: 46px !important;
+  }
+}
+.btn-height-48 {
+  height: 48px !important;
+}
+.fixed-width-column {
+  overflow: hidden; /* Ẩn nội dung tràn */
+  text-overflow: ellipsis; /* Thêm dấu "..." nếu nội dung tràn */
+  white-space: nowrap; /* Không cho phép xuống dòng */
+}
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.widget-container {
+  position: relative;
+  overflow: hidden;
+  .loading-overlay {
+    position: absolute;
+    border-radius: inherit; /* Kế thừa border-radius từ cha */
+  }
+  mat-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.dark-theme {
+  .mat-mdc-snack-bar-container {
+    .mdc-snackbar__label {
+      background-color: #1a2537;
+    }
+    .mat-mdc-snackbar-surface {
+      background-color: white;
+    }
+  }
+}
+
+.dark-theme {
+  .horizontal-sidebar {
+    position: sticky;
+    top: 0; /* Dính tại vị trí xuất hiện */
+    z-index: 1000;
+    background-color: #1a2537; /* Màu nền sidebar */
+    padding: 10px 20px;
+    gap: 15px; /* Khoảng cách giữa các link */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow cho sidebar */
+  }
+}
+.horizontal-sidebar {
+  position: sticky;
+  top: 0; /* Dính tại vị trí xuất hiện */
+  z-index: 1000;
+  padding: 10px 20px;
+  gap: 15px; /* Khoảng cách giữa các link */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow cho sidebar */
+  background: #fff;
+}
+
+.mat-mdc-dialog-title {
+  padding-top: 10px !important;
+  margin: 0 !important;
+  &:before {
+    height: auto !important;
+  }
+}
+
+.tiktok-header {
+  background: #000;
+  color: #fff !important;
+  border-radius: 4px 4px 0 0;
+}
+
+.flow-control-router-title {
+  border-radius: 4px 4px 0 0;
+}
+
+.snackbar-success {
+  .mat-mdc-snackbar-surface {
+    background-color: #4caf50 !important;
+    color: #fff !important;
+  }
+}
+
+.badge {
+  --bs-badge-padding-x: 10px;
+  --bs-badge-padding-y: 5px;
+  --bs-badge-font-size: 0.8125rem;
+  --bs-badge-font-weight: 600;
+  --bs-badge-color: #fff;
+  --bs-badge-border-radius: 6px;
+  display: inline-block;
+  padding: var(--bs-badge-padding-y) var(--bs-badge-padding-x);
+  font-size: var(--bs-badge-font-size);
+  font-weight: var(--bs-badge-font-weight);
+  line-height: 1;
+  color: var(--bs-badge-color);
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: var(--bs-badge-border-radius)
+}
+
+.badge:empty {
+  display: none
+}
+
+.btn .badge {
+  position: relative;
+  top: -1px
+}
+.text-bg-dark {
+  color: #fff !important;
+  background-color: RGBA(var(--bs-dark-rgb), var(--bs-bg-opacity, 1)) !important;
+}
+
+.btn-close-dialog-icon {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  color: #000;
+}
+
+.table-default {
+  thead {
+    tr {
+      background-color: #dee1e8 !important;
+      line-height: 20px !important;
+      height: 40px !important;
+    }
+  }
+
+  /* Cố định cột đầu tiên */
+  .sticky-col-1 {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+  }
+
+  /* Cố định cột cuối sang phải */
+  .sticky-right {
+    position: sticky;
+    right: 0;
+    z-index: 2;
+  }
+
+  .sticky-box-shadow-right {
+    box-shadow: 8px 0px 20px -4px rgba(0, 0, 0, 0.15);
+  }
+
+  .sticky-box-shadow-left {
+    box-shadow: -8px 0px 20px -4px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Cố định header */
+  thead th {
+    position: sticky;
+    top: 0;
+    background: #f8f9fa;
+    z-index: 1;
+  }
+}
+
+.dark-theme {
+  .text-dark-200 {
+    color: #fff9 !important;
+  }
+
+  .dialog-content {
+    background-color: inherit !important;
+  }
+
+  .table-default {
+    thead {
+      tr {
+        background-color: inherit !important;
+      }
+    }
+  }
+
+  .btn-close-dialog-icon {
+    color: #fff;
+  }
+}
+
+.dialog-actions {
+  background-color: #fff !important;
+}
+.mat-mdc-dialog-content {
+  max-height: 85vh !important;
+}
+
+.product-image {
+  object-fit: contain;
+  width: 48px;
+  height: 48px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+}
+
+.table-custom-small {
+  td {
+    padding: 5px
+  }
+  th.mdc-data-table__cell, th.mdc-data-table__header-cell {
+    padding: 0 5px;
+  }
+}
+
+.btn-icon-button {
+  .mdc-button__label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+  }
+}

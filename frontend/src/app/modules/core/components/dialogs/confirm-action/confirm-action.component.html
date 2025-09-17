@@ -1,0 +1,9 @@
+<h5 mat-dialog-title class="mat-subtitle-1">{{ 'labels.confirmAction.title' | translate }}</h5>
+<div mat-dialog-content class="mat-subtitle-2 lh-16">
+    {{ 'labels.confirmAction.description' | translate }}
+</div>
+<div class="p-24 p-t-0 text-right">
+    <button mat-flat-button color="primary" (click)="confirm()" mat-dialog-close>
+        {{ 'buttons.ok' | translate }}
+    </button>
+</div>

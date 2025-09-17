@@ -1,0 +1,25 @@
+### daily ###
+## Nhanh Auto Login get cookie ##
+#*/15 * * * * cd /app/backend && node cronjobs/nhanh.vn/auto.login.js
+
+## Nhanh.vn Update Inventory at 10h & 18h30 ##
+#0 10 * * * cd /app/backend && node cronjobs/nhanh.vn/warehouse.inventory.update.js
+#30 18 * * * cd /app/backend && node cronjobs/nhanh.vn/warehouse.inventory.update.js
+
+## Cập nhật sản phẩm và sku từ pancake -> nhanh theo ngày tạo
+0 * * * *  cd /app/backend && node cronjobs/pos.pancake.fm/product.update.js today
+10 * * * *  cd /app/backend && node cronjobs/pos.pancake.fm/product.sku.update.js today
+
+## Cập nhật đơn đã xác nhận bị thiếu ##
+0 20 * * * cd /app/backend && node cronjobs/pos.pancake.fm/order.missing.update.js yesterday
+
+## Cập nhât access token cho shopee shop ##
+10 * * * * cd /app/backend && node cronjobs/partner-shopeemobile-com/auto.shop.refresh.access.token.js
+
+## Thu thập đơn hàng ở trạng thái delay giao hang | giao hang thất bại
+0 * * * *  cd /app/backend && node cronjobs/pos.pancake.fm/order.in-transit.delay-giao-hang.js
+## Cập nhật supplier
+10 * * * *  cd /app/backend && node cronjobs/pos.pancake.fm/supplier.update.js
+
+## Thống kê doanh thu trong phiên livestream hàng ngày - 5 phút / 1 lần - 11h - 15h, 19h - 23h
+*/5 * * * *  cd /app/backend && node cronjobs/pos.pancake.fm/order.live-stream-stats-daily.js

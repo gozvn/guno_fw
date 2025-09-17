@@ -1,0 +1,181 @@
+<div class="bg-white rounded p-20 m-b-30">
+    <div class="row">
+        <div class="col-sm-8">
+            <h4 class="page-title m-0 f-s-18 f-w-600">
+                {{ 'admin.system.route.title' | translate }}
+            </h4>
+        </div>
+        <div class="col-sm-4 text-right">
+            <div class="d-flex align-items-center justify-content-start justify-content-lg-end">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a class="text-body-color" [routerLink]="['/']">{{ 'labels.dashboard' | translate }}</a></li>
+                    <li class="breadcrumb-item">
+                        <i-tabler name="circle-filled" class="icon-8"></i-tabler>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<mat-card class="cardWithShadow widget-container router-container">
+    <mat-card-content class="p-t-0">
+        <div class="p-t-0 p-b-20 d-lg-flex">
+            <mat-form-field [style.width.px]="300" class="theme-select m-r-10 d-flex m-t-20 input-height-46" appearance="outline">
+                <mat-label>{{ 'admin.system.role.keywordLabel' | translate }}</mat-label>
+                <input type="text"
+                       placeholder="{{ 'admin.system.role.placeholder.enterKeyword' | translate }}"
+                       matInput
+                       (keyup.enter)="onInputKeyword($event)"
+                       [(ngModel)]="keyword" />
+            </mat-form-field>
+            <div class="m-r-10 p-t-12 m-t-24" [innerHTML]="'admin.system.route.findCountRoute' | translate: { count: filterCount | number }"></div>
+            <button mat-mini-fab color="primary m-t-24" (click)="search()" class="d-flex">
+                <i class="iconify icon-20 d-flex" data-icon="solar:refresh-bold"></i>
+            </button>
+            <button mat-flat-button color="primary m-t-20 m-l-auto btn-height-46" class="d-flex align-items-center" (click)="openDialogSyncRoute()">
+                <span>{{'admin.system.route.sync' | translate}}</span>
+            </button>
+        </div>
+
+        <mat-divider></mat-divider>
+        <div class="table-responsive">
+            <table mat-table [dataSource]="routes" class="w-100">
+                <!-- Weight Column -->
+                <ng-container matColumnDef="sequence">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'labels.sequence' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element; let i = index" class="mat-body-1" [style.width.px]="75">
+                        <p class="f-s-15 f-w-700 m-t-4 m-b-0">{{ i + 1 + (pageIndex) * pageSize }}</p>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.route.name' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="mat-body-1 text-hover-primary">
+                        <span class="hover-text cursor-pointer"
+                            *ngIf="editNameId !== element.id"
+                            (click)="editValue(element.name, element, typeObjects.name)" (focus)="editValue(element.name, element, typeObjects.name);"
+                            matTooltip="{{ 'buttons.clickToEdit' | translate }}"
+                            matTooltipPosition="above">{{ element.name }}
+                        </span>
+                        <div *ngIf="editNameId === element.id" class="d-flex">
+                            <mat-form-field style="width: 350px" class="theme-select m-r-10 d-flex input-height-40" appearance="outline">
+                                <input matInput #inlineEditControlName (keypress)="onKeyPressInput($event, element, typeObjects.name)" [required]="required" [value]="element.name" [type]="'text'" placeholder="{{ 'admin.system.route.placeholder.enterRouteName' | translate }}" />
+                                <button mat-flat-button matSuffix class="bg-error text-white btn-width-40 btn-height-40 r-r-0 r-l-0 cancel-action-btn"
+                                    (click)="editNameId = ''">
+                                    <i-tabler name="x"></i-tabler>
+                                </button>
+                                <button mat-flat-button matSuffix class="bg-success text-white btn-height-40 r-l-0"
+                                        [disabled]="!inlineEditControlName.value"
+                                        (click)="saveValue(element, typeObjects.name)">
+                                    <i-tabler name="check"></i-tabler>
+                                </button>
+                            </mat-form-field>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="groupName">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.route.groupName' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="mat-body-1 text-hover-primary" [style.width.px]="400">
+                        <span class="hover-text cursor-pointer"
+                            *ngIf="editGroupNameId !== element.id"
+                            (click)="editValue(element.groupName, element, typeObjects.groupName)" (focus)="editValue(element.groupName, element, typeObjects.groupName);"
+                            matTooltip="{{ 'buttons.clickToEdit' | translate }}"
+                            matTooltipPosition="above">{{ element.groupName || 'N/A'}}
+                        </span>
+                        <div *ngIf="editGroupNameId === element.id" class="d-flex">
+                            <mat-form-field style="width: 350px" class="theme-select m-r-10 d-flex input-height-40" appearance="outline">
+                                <input matInput #inlineEditControlGroupName (keypress)="onKeyPressInput($event, element, typeObjects.groupName)" [required]="required" [value]="element.groupName" [type]="'text'" placeholder="{{ 'admin.system.route.placeholder.enterGroupName' | translate }}" />
+                                <button mat-flat-button matSuffix class="bg-error text-white btn-height-40 cancel-action-btn r-l-0 r-r-0"
+                                    (click)="editGroupNameId = ''">
+                                    <i-tabler name="x"></i-tabler>
+                                </button>
+                                <button mat-flat-button matSuffix class="bg-success text-white btn-height-40 r-l-0"
+                                        [disabled]="!inlineEditControlGroupName.value"
+                                        (click)="saveValue(element, typeObjects.groupName)">
+                                    <i-tabler name="check"></i-tabler>
+                                </button>
+                            </mat-form-field>
+                        </div>
+                    </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="route">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.route.route' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="mat-body-1 text-hover-primary" [style.width.px]="450">
+                        <span class="hover-text cursor-pointer"
+                            *ngIf="editRouteId !== element.id"
+                            (click)="editValue(element.route, element, typeObjects.route)" (focus)="editValue(element.route, element, typeObjects.route)"
+                            matTooltip="{{ 'buttons.clickToEdit' | translate }}"
+                            matTooltipPosition="above">{{ element.route }}
+                        </span>
+                        <div *ngIf="editRouteId === element.id" class="d-flex">
+                            <mat-form-field style="width: 350px" class="theme-select m-r-10 d-flex input-height-40" appearance="outline">
+                                <input matInput #inlineEditControlRoute (keypress)="onKeyPressInput($event, element, typeObjects.route)" [required]="required" [value]="element.route" [type]="'text'" placeholder="{{ 'admin.system.route.placeholder.enterRoute' | translate }}" />
+                                <button matSuffix mat-flat-button class="bg-error cancel-action-btn text-white btn-height-40 r-l-0 r-r-0"
+                                    (click)="editRouteId = ''">
+                                    <i-tabler name="x"></i-tabler>
+                                </button>
+                                <button matSuffix mat-flat-button class="bg-success text-white btn-height-40 r-l-0"
+                                        [disabled]="!inlineEditControlRoute.value"
+                                        (click)="saveValue(element, typeObjects.route)">
+                                    <i-tabler name="check"></i-tabler>
+                                </button>
+                            </mat-form-field>
+                            
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="uri">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.route.uri' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="mat-body-1" [style.width.px]="300">
+                        {{ element.uri }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="method">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.route.method' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="mat-body-1" [style.width.px]="100">
+                        <ng-container *ngFor="let method of element.methods">
+                            <span
+                            class="rounded text-white f-w-600 p-6 p-y-4 f-s-12 m-t-8"
+                            [ngClass]="{
+                                'bg-error': method === 'DELETE', 
+                                'bg-success': method === 'POST',
+                                'bg-warning': method === 'PUT',
+                                'bg-primary': method === 'GET'}">
+                            {{method}}
+                        </span>
+                        </ng-container>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+        </div>
+        <mat-divider *ngIf="pageLength" class="m-b-10"></mat-divider>
+        <mat-paginator
+                [length]="pageLength"
+                [pageIndex]="pageIndex"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="pageSizeOptions"
+                (page)="onPageChange($event)"
+                aria-label="Select page"></mat-paginator>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,177 @@
+<div class="bg-white rounded p-20 m-b-30">
+    <div class="row">
+        <div class="col-sm-8">
+            <h4 class="page-title m-0 f-s-18 f-w-600">
+                {{ queue ? queue.name : '' }}
+            </h4>
+        </div>
+        <div class="col-sm-4 text-right">
+            <div class="d-flex align-items-center justify-content-start justify-content-lg-end">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a class="text-body-color" [routerLink]="['/']">{{ 'labels.dashboard' | translate }}</a></li>
+                    <li class="breadcrumb-item">
+                        <i-tabler name="circle-filled" class="icon-8"></i-tabler>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a [routerLink]="['/', 'queue', 'dashboard']">
+                            <span class="rounded-sm p-x-8 p-y-4 text-primary bg-light-primary f-s-12 f-w-500">
+                                {{ 'labels.queue' | translate }}
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<mat-card class="cardWithShadow" *ngIf="queue">
+    <mat-tab-group
+            mat-stretch-tabs="false"
+            animationDuration="0ms"
+            [selectedIndex]="selectedIndex"
+            (selectedTabChange)="onTabChange($event)"
+            class="theme-tab label-padding">
+
+        <!-- status -->
+        <mat-tab *ngFor="let item of statuses">
+            <ng-template mat-tab-label>
+                <div class="d-flex align-items-center m-r-8 m-t-4" *ngIf="colors[item]">
+                    <span [style.background-color]="colors[item]" class="rounded-sm p-x-4 p-y-4"></span>
+                </div>
+                <div class="p-t-4 text-uppercase">{{ item }} <span *ngIf="queue.counts[item]" class="bg-dark-200 text-white rounded-sm p-x-8 p-y-4 f-w-500 f-s-12 m-l-4">{{ queue.counts[item] | number }}</span></div>
+            </ng-template>
+            <mat-card-content>
+                <div class="row" *ngIf="status === item">
+                    <div class="col-4">
+                        <div class="d-flex">
+                            <button *ngIf="pageLength" mat-flat-button (click)="openDialogConfirm('queue', queue)" color="dark">
+                                <mat-icon>
+                                    <i-tabler name="refresh" class="icon-20 m-r-8"></i-tabler>
+                                </mat-icon>
+                                {{ 'buttons.retryAll' | translate }}
+                            </button>
+                            <button class="m-l-10" *ngIf="pageLength" mat-flat-button (click)="openDialogConfirm('queue', queue)" color="dark">
+                                <mat-icon>
+                                    <i-tabler name="trash" class="icon-20 m-r-8"></i-tabler>
+                                </mat-icon>
+                                {{ 'buttons.cleanAll' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <mat-paginator
+                            *ngIf="pageLength"
+                            [length]="pageLength"
+                            [pageIndex]="pageIndex"
+                            [pageSize]="pageSize"
+                            [pageSizeOptions]="pageSizeOptions"
+                            (page)="onPageChange($event)"
+                            aria-label="Select page"></mat-paginator>
+                    </div>
+                </div>
+
+                <mat-card *ngFor="let job of queue.jobs; trackBy: trackById">
+                    <mat-card-content>
+                        <mat-card-title>#{{ job.id }}</mat-card-title>
+
+                        <div class="row">
+                            <div class="d-flex">
+                                <div class="timeline m-t-24 text-right">
+
+                                    <div class="timeline-item d-flex overflow-hidden">
+                                        <div class="time text-right mat-subtitle-1 f-s-14">
+                                            <div class="text-muted f-s-12">{{ 'labels.addedAt' | translate }}</div>
+                                            <div>{{ job.timestamp | date: 'HH:mm:ss' }}</div>
+                                        </div>
+                                        <div class="point d-flex align-items-center">
+                                            <span class="timeline-badge m-y-8" [style.background-color]="colors.paused"></span>
+                                            <span class="timline-border d-block"></span>
+                                        </div>
+                                        <div class="desc">
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item d-flex overflow-hidden" *ngIf="job.processedOn">
+                                        <div class="time text-right mat-subtitle-1 f-s-14">
+                                            <div class="text-muted f-s-12 p-t-10 p-b-10" *ngIf="job.processedOn">{{ (job.processedOn - job.timestamp) / 1000 + 's' || '' }}</div>
+                                            <div class="text-muted f-s-12" *ngIf="job.processedOn">{{ 'labels.processStartedAt' | translate }}</div>
+                                            <div *ngIf="job.processedOn">{{ job.processedOn | date: 'HH:mm:ss' }}</div>
+                                        </div>
+                                        <div class="point d-flex align-items-center">
+                                            <span class="timeline-badge m-y-8x" [style.background-color]="colors.active"></span>
+                                            <span class="timline-border d-block"></span>
+                                        </div>
+                                        <div class="desc"></div>
+                                    </div>
+                                    <div class="timeline-item d-flex overflow-hidden" *ngIf="job.finishedOn">
+                                        <div class="time text-right mat-subtitle-1 f-s-14">
+                                            <div class="text-muted f-s-12 p-t-10 p-b-10" *ngIf="job.processedOn && job.finishedOn">{{ (job.finishedOn - job.processedOn) / 1000 + 's' || '' }}</div>
+                                            <div class="text-muted f-s-12" *ngIf="job.finishedOn">{{ (job.isFailed ? 'labels.failedAt' : 'labels.finishedAt') | translate }}</div>
+                                            <div *ngIf="job.finishedOn">{{ job.finishedOn | date: 'HH:mm:ss' }}</div>
+                                        </div>
+                                        <div class="point d-flex align-items-center">
+                                            <span class="timeline-badge m-y-8" [style.background-color]="colors.completed"></span>
+                                            <span class="timline-border d-block"></span>
+                                        </div>
+                                        <div class="desc">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="contentWrapper">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <h3 class="border-bottom">{{ job.name }} <span *ngIf="job.attempts > 1" class="m-l-20 text-muted f-s-14 fw-normal">attempt #{{ job.attempts }}</span></h3>
+                                        </div>
+                                        <div class="col-lg-6 float-end text-right">
+                                            <button *ngIf="job.isFailed" mat-mini-fab (click)="openDialogConfirm('job', { queue: queue, job: job}, 'retry')" color="inherit">
+                                                <mat-icon>
+                                                    <i-tabler name="refresh" class="icon-20"></i-tabler>
+                                                </mat-icon>
+                                            </button>
+                                            <button *ngIf="pageLength" mat-mini-fab (click)="openDialogConfirm('job', { queue: queue, job: job}, 'clean')" color="inherit">
+                                                <mat-icon>
+                                                    <i-tabler name="trash" class="icon-20"></i-tabler>
+                                                </mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <mat-tab-group
+                                            mat-stretch-tabs="false"
+                                            animationDuration="0ms"
+                                            class="theme-tab label-padding job-tabs">
+                                        <mat-tab *ngFor="let tab of jobTabs">
+                                            <ng-template mat-tab-label>
+                                                <span class="text-capitalize">{{ tab }}</span>
+                                            </ng-template>
+                                            <mat-card-content class="overflow-auto" [style.max-height.px]="500">
+                                                <ng-container [ngSwitch]="tab" class="m-b-2" *ngIf="status === item">
+                                                    <pre *ngSwitchCase="'data'"><code>{{ { data: job.data, returnValue: job.returnValue } | json }}</code></pre>
+                                                    <pre *ngSwitchCase="'options'"><code>{{ job.opts | json }}</code></pre>
+                                                    <pre *ngSwitchCase="'logs'"><code>{{ job?.logs | json }}</code></pre>
+                                                    <div *ngSwitchCase="'error'" class="m-t-10 text-error"><pre><code>{{ job.stacktrace.join('\n') || job.failedReason || 'NA' }}</code></pre></div>
+                                                </ng-container>
+                                            </mat-card-content>
+                                        </mat-tab>
+                                    </mat-tab-group>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-paginator
+                    *ngIf="pageLength"
+                    [length]="pageLength"
+                    [pageIndex]="pageIndex"
+                    [pageSize]="pageSize"
+                    [pageSizeOptions]="pageSizeOptions"
+                    (page)="onPageChange($event)"
+                    aria-label="Select page"></mat-paginator>
+            </mat-card-content>
+        </mat-tab>
+        <!-- / status -->
+
+    </mat-tab-group>
+</mat-card>

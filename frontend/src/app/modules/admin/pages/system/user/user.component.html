@@ -1,0 +1,178 @@
+<div class="bg-white rounded p-20 m-b-30">
+    <div class="row">
+        <div class="col-sm-8">
+            <h4 class="page-title m-0 f-s-18 f-w-600">
+                {{ 'admin.system.user.title' | translate }}
+            </h4>
+        </div>
+        <div class="col-sm-4 text-right">
+            <div class="d-flex align-items-center justify-content-start justify-content-lg-end">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a class="text-body-color" [routerLink]="['/']">{{ 'labels.dashboard' | translate }}</a></li>
+                    <li class="breadcrumb-item">
+                        <i-tabler name="circle-filled" class="icon-8"></i-tabler>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<mat-card class="cardWithShadow widget-container">
+    <mat-card-content class="p-t-0">
+        <div class="p-t-0 p-b-20 d-lg-flex">
+            <mat-form-field [style.width.px]="300" class="theme-select m-r-10 d-flex m-t-20 input-height-46" appearance="outline">
+                <mat-label>{{ 'admin.system.user.keywordLabel' | translate }}</mat-label>
+                <input type="text"
+                       placeholder="{{ 'admin.system.user.placeholder.enterKeyword' | translate }}"
+                       matInput
+                       (keyup.enter)="onInputKeyword($event)"
+                       [(ngModel)]="filter.keyword" />
+            </mat-form-field>
+            <mat-form-field class="theme-select m-r-10 d-flex m-t-20 input-height-46" appearance="outline" [style.width.px]="200">
+                <mat-label>{{ 'admin.system.user.status' | translate }}</mat-label>
+                <mat-select [value]="filter.status" (selectionChange)="onSelectStatusChange($event)">
+                    <mat-option [value]="-2">{{ 'labels.all' | translate }}</mat-option>
+                    <mat-option *ngFor="let s of statuses" [value]="s">
+                        <ng-container>
+                            {{ 'admin.system.user.status.' + s | translate }}
+                        </ng-container>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="theme-select m-r-10 d-flex m-t-20 input-height-46" appearance="outline" [style.width.px]="200">
+                <mat-label>{{ 'admin.system.user.role' | translate }}</mat-label>
+                <mat-select [value]="filter.role" (selectionChange)="onSelectRoleChange($event)">
+                    <mat-option [value]="-1">{{ 'labels.all' | translate }}</mat-option>
+                    <mat-option *ngFor="let r of roles" [value]="r.id">
+                        <ng-container>
+                            {{ r.name }}
+                        </ng-container>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="m-r-10 p-t-12 m-t-24" [innerHTML]="'admin.system.user.findCountUser' | translate: { count: filterCount | number }"></div>
+            <button mat-mini-fab color="primary m-t-24" (click)="search()" class="d-flex">
+                <i class="iconify icon-20 d-flex" data-icon="solar:refresh-bold"></i>
+            </button>
+        </div>
+
+        <mat-divider></mat-divider>
+        <div class="table-responsive">
+            <table mat-table [dataSource]="users" class="w-100">
+                <!-- Weight Column -->
+                <ng-container matColumnDef="sequence">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'labels.sequence' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element; let i = index" class="mat-body-1" [style.width.px]="75">
+                        <p class="f-s-15 f-w-700 m-t-4 m-b-0">{{ i + 1 + (pageIndex) * pageSize }}</p>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.user.account' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="mat-body-1">
+                        <div class="d-flex">
+                            <div class="cover p-r-10 d-flex align-items-center">
+                                 <img width="55px" class="rounded-circle" [src]="element.avatar ?? avatarDefault"/>
+                            </div>
+                            <div class="">
+                                <a (click)="openDialogPermission(element)">
+                                    <span class="text-primary" [ngClass]="{'cursor-pointer' : element.roleId !== 1}">
+                                        {{ element.fullName ?? element.email }}
+                                    </span>
+                                </a>
+                                <ul class="d-flex p-l-0 m-b-0">
+                                    <li class="text-muted d-flex align-items-center p-r-15">
+                                        <i-tabler name="calendar-clock" class="icon-18" matTooltip="{{'admin.system.user.createdTime' | translate}}"></i-tabler>
+                                        <span class="p-l-6">
+                                            {{ element.createdAt | date: 'HH:mm dd/MM/YYYY' }}
+                                        </span>
+                                    </li>
+                                    <li class="text-muted d-flex align-items-center">
+                                        <i-tabler name="user-circle" class="icon-18" matTooltip="{{'admin.system.user.id' | translate}}"></i-tabler>
+                                        <span class="p-l-6">
+                                            {{ element.id }}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.user.email' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="mat-body-1" [style.width.px]="500">
+                        <h5 class="f-s-14 fw-normal m-b-0 m-t-0">{{ element.email }}</h5>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.user.status' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="mat-body-1" [style.width.px]="150">
+                        <div>
+                            <span [ngClass]="{'bg-success': element.status === 1, 'bg-warning': element.status === 0, 'bg-error': element.status === -1}" class="rounded f-w-600 p-6 p-y-4 f-s-12 m-t-8 text-white">
+                                {{ 'admin.system.user.status.' + element.status | translate }}
+                            </span>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="role">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                        {{ 'admin.system.user.role' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="mat-body-1" [style.width.px]="250">
+                        <mat-form-field class="theme-select d-flex input-height-46" appearance="outline" [style.width.px]="250">
+                            <mat-select [value]="element.roleId" (selectionChange)="setRole($event, element)" [disabled]="element.roleId === 1">
+                                <mat-option *ngFor="let s of roles" [value]="s.id">
+                                    <ng-container>
+                                        {{ s.name }}
+                                    </ng-container>
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 fixed-width-column">
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="text-center mat-body-1" [style.width.px]="50">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="action" *ngIf="element.roleId !== 1">
+                            <i-tabler name="dots-vertical"></i-tabler>
+                        </button>
+                        <mat-menu #menu="matMenu" class="cardWithShadow">
+                            <button mat-menu-item (click)="openDialogPermission(element)">
+                                <mat-icon>
+                                    <i-tabler name="shield-cog"></i-tabler>
+                                </mat-icon>
+                                <span>{{'admin.system.user.permission' | translate}}</span>
+                            </button>
+                            <mat-divider></mat-divider>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+        </div>
+        <mat-divider *ngIf="pageLength" class="m-b-10"></mat-divider>
+        <mat-paginator
+                [length]="pageLength"
+                [pageIndex]="pageIndex"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="pageSizeOptions"
+                (page)="onPageChange($event)"
+                aria-label="Select page"></mat-paginator>
+    </mat-card-content>
+</mat-card>

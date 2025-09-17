@@ -1,0 +1,12 @@
+::ng-deep .admin-dialog-role-permission {
+    .mat-mdc-tab-body-content {
+        overflow: hidden !important;
+    }
+    .mat-mdc-form-field-error-wrapper {
+        padding: 0
+    }
+    .mdc-button__label {
+        display: flex;
+        align-items: center
+    }
+}
